@@ -57,9 +57,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DE_PLATFORM_WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)DummyEngine/src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,9 +73,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DE_PLATFORM_WINDOWS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)DummyEngine/src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -87,6 +89,118 @@
     <ProjectReference Include="..\DummyEngine\DummyEngine.vcxproj">
       <Project>{049b36b8-0fad-4d9a-a243-c8e6679b78d4}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\SandboxApp.cpp">
+      <UseMSVC>false</UseMSVC>
+      <LlvmTransitionalOption>NextGenNone</LlvmTransitionalOption>
+      <EnableExpandedLineNumberInfo>false</EnableExpandedLineNumberInfo>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <OptimizeForWindowsApplication>false</OptimizeForWindowsApplication>
+      <EnableMatrixMultiplyLibraryCall>Default</EnableMatrixMultiplyLibraryCall>
+      <Parallelization>false</Parallelization>
+      <UseIntelOptimizedHeaders>false</UseIntelOptimizedHeaders>
+      <ProfileGuidedOptimization>Disabled</ProfileGuidedOptimization>
+      <CodeCoverageOperations>Disabled</CodeCoverageOperations>
+      <UnmaskFloatingPointExceptions>No</UnmaskFloatingPointExceptions>
+      <FloatingPointExpressionEvaluation>Default</FloatingPointExpressionEvaluation>
+      <GenerateAlternateCodePaths>None</GenerateAlternateCodePaths>
+      <UseProcessorExtensions>None</UseProcessorExtensions>
+      <DisableCilkKeywords>false</DisableCilkKeywords>
+      <DisableIntelLangExtensions>false</DisableIntelLangExtensions>
+      <OpenMP>None</OpenMP>
+      <DisableFunctionSplitting>false</DisableFunctionSplitting>
+      <RecognizeRestrictKeyword>false</RecognizeRestrictKeyword>
+      <EnableAnsiAliasing>false</EnableAnsiAliasing>
+      <EmitDiagnosticsToFile>false</EmitDiagnosticsToFile>
+      <DiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\Sandbox.diag</DiagnosticsFile>
+      <VectorizerDiagnosticLevel>Default</VectorizerDiagnosticLevel>
+      <OptimizationDiagnosticLevel>Disable</OptimizationDiagnosticLevel>
+      <EmitOptimizationDiagnosticsToFile>false</EmitOptimizationDiagnosticsToFile>
+      <OptimizationDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\Sandbox.rep</OptimizationDiagnosticsFile>
+      <OptimizationDiagnosticPhase>All</OptimizationDiagnosticPhase>
+      <LevelOfStaticAnalysis>None</LevelOfStaticAnalysis>
+      <SCResultsDirectory>My Inspector XE Results - Sandbox</SCResultsDirectory>
+      <AnalyzeIncludeFiles>false</AnalyzeIncludeFiles>
+      <ModeOfStaticAnalysis>None</ModeOfStaticAnalysis>
+      <AnalyzeFilesIndividually>false</AnalyzeFilesIndividually>
+      <TreatEnumerationsAsKnownRanges>false</TreatEnumerationsAsKnownRanges>
+      <CheckPointers>None</CheckPointers>
+      <CheckUndimensionedArrays>false</CheckUndimensionedArrays>
+      <CheckDanglingPointers>None</CheckDanglingPointers>
+      <DisablePrecompiledHeaderMessages>false</DisablePrecompiledHeaderMessages>
+      <OffloadConstructs>Mandatory</OffloadConstructs>
+      <GPUArch>Default</GPUArch>
+      <EmitGADDiagnosticsToFile>false</EmitGADDiagnosticsToFile>
+      <GADDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\gpu-asm-dump.txt</GADDiagnosticsFile>
+      <OffloadOpenMP>Default</OffloadOpenMP>
+      <OffloadOpenMPTarget>Default</OffloadOpenMPTarget>
+      <OffloadSvm>No</OffloadSvm>
+      <OffloadArch>Default</OffloadArch>
+      <Mtune>No</Mtune>
+      <ConformanceMode>true</ConformanceMode>
+      <EnableGapAnalysis>Disable</EnableGapAnalysis>
+      <EmitGAPDiagnosticsToFile>false</EmitGAPDiagnosticsToFile>
+      <GAPDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\Sandbox.gap</GAPDiagnosticsFile>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\vc142.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\Sandbox.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ShowIncludes>false</ShowIncludes>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\Sandbox.tlog\</TrackerLogDirectory>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\Sandbox\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <PreprocessorDefinitions>DE_PLATFORM_WINDOWS;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\DummyEngine/src;</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
