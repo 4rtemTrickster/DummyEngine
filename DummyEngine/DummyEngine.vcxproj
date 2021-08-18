@@ -12,11 +12,120 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Dummy.h" />
-    <ClInclude Include="src\Dummy\Application.h" />
+    <ClInclude Include="src\Dummy\Application\Application.h" />
     <ClInclude Include="src\Dummy\Core.h" />
+    <ClInclude Include="src\Dummy\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dummy\Application.cpp" />
+    <ClCompile Include="src\Dummy\Application\Application.cpp">
+      <UseMSVC>false</UseMSVC>
+      <LlvmTransitionalOption>NextGenNone</LlvmTransitionalOption>
+      <EnableExpandedLineNumberInfo>false</EnableExpandedLineNumberInfo>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <OptimizeForWindowsApplication>false</OptimizeForWindowsApplication>
+      <EnableMatrixMultiplyLibraryCall>Default</EnableMatrixMultiplyLibraryCall>
+      <Parallelization>false</Parallelization>
+      <UseIntelOptimizedHeaders>false</UseIntelOptimizedHeaders>
+      <ProfileGuidedOptimization>Disabled</ProfileGuidedOptimization>
+      <CodeCoverageOperations>Disabled</CodeCoverageOperations>
+      <UnmaskFloatingPointExceptions>No</UnmaskFloatingPointExceptions>
+      <FloatingPointExpressionEvaluation>Default</FloatingPointExpressionEvaluation>
+      <GenerateAlternateCodePaths>None</GenerateAlternateCodePaths>
+      <UseProcessorExtensions>None</UseProcessorExtensions>
+      <DisableCilkKeywords>false</DisableCilkKeywords>
+      <DisableIntelLangExtensions>false</DisableIntelLangExtensions>
+      <OpenMP>None</OpenMP>
+      <DisableFunctionSplitting>false</DisableFunctionSplitting>
+      <RecognizeRestrictKeyword>false</RecognizeRestrictKeyword>
+      <EnableAnsiAliasing>false</EnableAnsiAliasing>
+      <EmitDiagnosticsToFile>false</EmitDiagnosticsToFile>
+      <DiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\DummyEngine.diag</DiagnosticsFile>
+      <VectorizerDiagnosticLevel>Default</VectorizerDiagnosticLevel>
+      <OptimizationDiagnosticLevel>Disable</OptimizationDiagnosticLevel>
+      <EmitOptimizationDiagnosticsToFile>false</EmitOptimizationDiagnosticsToFile>
+      <OptimizationDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\DummyEngine.rep</OptimizationDiagnosticsFile>
+      <OptimizationDiagnosticPhase>All</OptimizationDiagnosticPhase>
+      <LevelOfStaticAnalysis>None</LevelOfStaticAnalysis>
+      <SCResultsDirectory>My Inspector XE Results - DummyEngine</SCResultsDirectory>
+      <AnalyzeIncludeFiles>false</AnalyzeIncludeFiles>
+      <ModeOfStaticAnalysis>None</ModeOfStaticAnalysis>
+      <AnalyzeFilesIndividually>false</AnalyzeFilesIndividually>
+      <TreatEnumerationsAsKnownRanges>false</TreatEnumerationsAsKnownRanges>
+      <CheckPointers>None</CheckPointers>
+      <CheckUndimensionedArrays>false</CheckUndimensionedArrays>
+      <CheckDanglingPointers>None</CheckDanglingPointers>
+      <DisablePrecompiledHeaderMessages>false</DisablePrecompiledHeaderMessages>
+      <OffloadConstructs>Mandatory</OffloadConstructs>
+      <GPUArch>Default</GPUArch>
+      <EmitGADDiagnosticsToFile>false</EmitGADDiagnosticsToFile>
+      <GADDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\gpu-asm-dump.txt</GADDiagnosticsFile>
+      <OffloadOpenMP>Default</OffloadOpenMP>
+      <OffloadOpenMPTarget>Default</OffloadOpenMPTarget>
+      <OffloadSvm>No</OffloadSvm>
+      <OffloadArch>Default</OffloadArch>
+      <Mtune>No</Mtune>
+      <ConformanceMode>true</ConformanceMode>
+      <EnableGapAnalysis>Disable</EnableGapAnalysis>
+      <EmitGAPDiagnosticsToFile>false</EmitGAPDiagnosticsToFile>
+      <GAPDiagnosticsFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\DummyEngine.gap</GAPDiagnosticsFile>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\vc142.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\DummyEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ShowIncludes>false</ShowIncludes>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\DummyEngine.tlog\</TrackerLogDirectory>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>E:\Programming\Лабы за 3й курс\Графика\DummyEngine\bin-int\Debug-x64\DummyEngine\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <PreprocessorDefinitions>DE_PLATFORM_WINDOWS; DE_BUILD_DLL; _DEBUG;_CONSOLE;_WINDLL;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -5,13 +5,7 @@ class SandboxApp : public Dummy::Application
 	
 };
 
-int main()
+Dummy::Application* Dummy::CreateApplication()
 {
-	SandboxApp* app = new SandboxApp;
-
-	app->Run();
-
-	delete app;
-
-	return 0;
+	return new SandboxApp();
 }

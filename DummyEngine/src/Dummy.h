@@ -1,4 +1,6 @@
 #pragma once
 
 
-#include "Dummy/Application.h"
+#include "Dummy/Application/Application.h"
+
+#include "Dummy/EntryPoint.h"

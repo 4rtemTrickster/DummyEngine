@@ -1,5 +1,5 @@
 #pragma once
-#include "Core.h"
+#include "../Core.h"
 
 namespace Dummy
 {
@@ -12,4 +12,11 @@ namespace Dummy
         
         void Run();
     };
+
+    
+    /**
+     * \brief To be defined in CLIENT
+     * \return Returns an application instance
+     */
+    Application* CreateApplication();
 }
