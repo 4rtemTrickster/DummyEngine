@@ -18,15 +18,18 @@
     <ClInclude Include="src\Dummy\Core.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dummy\Application.h">
+    <ClInclude Include="src\Dummy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dummy.h">
+    <ClInclude Include="src\Dummy\Application\Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\EntryPoint.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Dummy\Application.cpp">
+    <ClCompile Include="src\Dummy\Application\Application.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
