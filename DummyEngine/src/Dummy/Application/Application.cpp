@@ -20,5 +20,4 @@ namespace Dummy
             std::cout << "IT WORK'S" << std::endl;
         }
     }
-}
-/
+} 
