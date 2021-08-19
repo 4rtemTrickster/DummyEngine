@@ -1,36 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Dummy">
+      <UniqueIdentifier>{F1880F0D-5D9D-37BE-261F-DB1D92F233EF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Dummy\Application">
+      <UniqueIdentifier>{34B6D011-A0CC-CEA7-E943-5AC955999F2F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Dummy\Core.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dummy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Dummy.h" />
     <ClInclude Include="src\Dummy\Application\Application.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Dummy\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\Core.h">
+      <Filter>Dummy</Filter>
     </ClInclude>
     <ClInclude Include="src\Dummy\EntryPoint.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Dummy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dummy\Application\Application.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Dummy\Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
