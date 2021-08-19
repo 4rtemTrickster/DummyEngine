@@ -1,7 +1,5 @@
 #include "Application.h"
 
-#include <iostream>
-
 
 namespace Dummy
 {
@@ -17,7 +15,6 @@ namespace Dummy
     {
         while(true)
         {
-            std::cout << "IT WORK'S" << std::endl;
         }
     }
 } 

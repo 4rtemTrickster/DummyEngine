@@ -147,9 +147,11 @@
     <ClInclude Include="src\Dummy\Application\Application.h" />
     <ClInclude Include="src\Dummy\Core.h" />
     <ClInclude Include="src\Dummy\EntryPoint.h" />
+    <ClInclude Include="src\Dummy\Log\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dummy\Application\Application.cpp" />
+    <ClCompile Include="src\Dummy\Log\Log.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
