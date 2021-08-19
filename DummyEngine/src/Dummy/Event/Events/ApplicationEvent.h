@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include <sstream>
 
 #include "../Event.h"
+
+#include <sstream>
 
 namespace Dummy
 {

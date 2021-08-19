@@ -1,5 +1,8 @@
 #include "Application.h"
 
+#include "../Event/Events/ApplicationEvent.h"
+
+
 
 namespace Dummy
 {
@@ -13,6 +16,10 @@ namespace Dummy
 
     void Application::Run()
     {
+        WindowResizeEvent e(1280, 720);
+
+        DE_TRACE(e);
+            
         while(true)
         {
         }

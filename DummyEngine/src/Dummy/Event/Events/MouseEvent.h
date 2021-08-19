@@ -41,6 +41,7 @@ namespace Dummy
         {
             std::stringstream ss;
             ss << "MouseScrollEvent: " << GetXOffset() << ", " << GetYOffset();
+            return ss.str();
         }
 
         EVENT_CLASS_TYPE(ET_MouseScrolled)
