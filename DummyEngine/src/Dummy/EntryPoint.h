@@ -8,10 +8,10 @@ extern Dummy::Application* Dummy::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    
     Dummy::Log::Init();
 
-    Dummy::Log::GetCoreLogger()->trace("Core logger initialized!");
+    DE_CORE_INFO("Logger initialized!");
+    DE_TRACE("Trace");
     
     auto app = Dummy::CreateApplication();
     app->Run();
