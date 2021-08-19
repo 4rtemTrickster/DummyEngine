@@ -148,6 +148,7 @@
     <ClInclude Include="src\Dummy\Core.h" />
     <ClInclude Include="src\Dummy\EntryPoint.h" />
     <ClInclude Include="src\Dummy\Event\Event.h" />
+    <ClInclude Include="src\Dummy\Event\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Dummy\Event\Events\KeyEvent.h" />
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h" />
     <ClInclude Include="src\Dummy\Log\Log.h" />
