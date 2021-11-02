@@ -1,4 +1,5 @@
-﻿#include "Log.h"
+﻿#include "DEpch.h"
+#include "Log.h"
 
 
 namespace Dummy

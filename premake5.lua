@@ -19,6 +19,9 @@ project "DummyEngine"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "DEpch.h"
+    pchsource "%{prj.name}/src/DEpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",

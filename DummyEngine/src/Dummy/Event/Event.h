@@ -1,8 +1,6 @@
 ﻿#pragma once
 
-#include <functional>
-#include <string>
-
+#include "DEpch.h"
 #include "../Core.h"
 
 

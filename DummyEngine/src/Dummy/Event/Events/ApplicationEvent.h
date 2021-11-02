@@ -1,8 +1,9 @@
 ﻿#pragma once
 
+#include "DEpch.h"
+
 #include "../Event.h"
 
-#include <sstream>
 
 namespace Dummy
 {
