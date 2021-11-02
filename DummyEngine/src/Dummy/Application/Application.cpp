@@ -9,6 +9,7 @@ namespace Dummy
 {
     Application::Application()
     {
+        window = std::unique_ptr<Window>(Window::Create());
     }
 
     Application::~Application()
@@ -17,12 +18,9 @@ namespace Dummy
 
     void Application::Run()
     {
-        WindowResizeEvent e(1280, 720);
-
-        DE_TRACE(e);
-            
-        while(true)
+        while(bRunning)
         {
+            window->OnUpdate();
         }
     }
 } 

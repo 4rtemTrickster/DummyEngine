@@ -17,3 +17,5 @@
 #ifdef DE_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif
+
+typedef unsigned int uint;

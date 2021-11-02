@@ -1,6 +1,7 @@
 #pragma once
 #include "../Core.h"
 #include "../Log/Log.h"
+#include "../Window/Window.h"
 
 namespace Dummy
 {
@@ -12,6 +13,10 @@ namespace Dummy
         virtual ~Application();
         
         void Run();
+
+    protected:
+        std::unique_ptr<Window> window;
+        bool bRunning = true;
     };
 
     

@@ -11,10 +11,17 @@ workspace "DummyEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include dir relative to root folder (Solution Dir)
+IncludeDir = {}
+IncludeDir["GLFW"] = "DummyEngine/vendor/GLFW/include"
+
+include "DummyEngine/vendor/GLFW"
+
 project "DummyEngine"
     location "DummyEngine"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -31,12 +38,18 @@ project "DummyEngine"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -52,14 +65,17 @@ project "DummyEngine"
 
     filter "configurations:Debug"
         defines "DE_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "DE_RELEASE"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "DE_DIST"
+        runtime "Release"
         optimize "On"
 
 project "Sandbox"
@@ -99,12 +115,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "DE_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "DE_RELEASE"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "DE_DIST"
+        runtime "Release"
         optimize "On"
