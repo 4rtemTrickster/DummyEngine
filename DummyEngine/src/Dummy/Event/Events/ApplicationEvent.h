@@ -36,6 +36,13 @@ namespace Dummy
     public:
         WindowCloseEvent() {}
 
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "WindowCloseEvent";
+            return ss.str();
+        }
+
         EVENT_CLASS_TYPE(ET_WindowClose)
         EVENT_CLASS_CATEGORY(EC_Application)
     };

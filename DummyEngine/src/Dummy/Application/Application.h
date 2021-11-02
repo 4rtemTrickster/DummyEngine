@@ -2,6 +2,7 @@
 #include "../Core.h"
 #include "../Log/Log.h"
 #include "../Window/Window.h"
+#include "Dummy/Event/Events/ApplicationEvent.h"
 
 namespace Dummy
 {
@@ -14,7 +15,12 @@ namespace Dummy
         
         void Run();
 
+        void OnEvent(Event& e);
+
     protected:
+
+        bool OnWindowClose(WindowCloseEvent& e);
+        
         std::unique_ptr<Window> window;
         bool bRunning = true;
     };

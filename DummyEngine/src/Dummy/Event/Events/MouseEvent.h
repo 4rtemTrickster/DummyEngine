@@ -81,7 +81,7 @@ namespace Dummy
         EVENT_CLASS_TYPE(ET_MouseButtonPressed)
     };
 
-    class DUMMI_API MouseButtonReleasedEvent : public MouseButtonEvent
+    class DUMMY_API MouseButtonReleasedEvent : public MouseButtonEvent
     {
     public:
         MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
