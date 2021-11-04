@@ -20,6 +20,10 @@ namespace Dummy
     {
         while(bRunning)
         {
+            for(Layer* layer : Layer_Stack)
+                layer->OnUpdate();
+
+            
             window->OnUpdate();
         }
     }
@@ -30,7 +34,22 @@ namespace Dummy
 
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
         
-        DE_CORE_TRACE("{0}", e);
+        for(auto it = Layer_Stack.end(); it != Layer_Stack.begin(); )
+        {
+            (*--it)->OnEvent(e);
+
+            if(e.Handled) break;
+        }
+    }
+
+    void Application::PushLayer(Layer* layer)
+    {
+        Layer_Stack.PushLayer(layer);
+    }
+
+    void Application::PushOverlay(Layer* overlay)
+    {
+        Layer_Stack.PushOverlay(overlay);
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e)
