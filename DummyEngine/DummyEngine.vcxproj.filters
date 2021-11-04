@@ -13,6 +13,15 @@
     <Filter Include="Dummy\Event\Events">
       <UniqueIdentifier>{A630372F-9214-F884-FB74-F2D7E777E206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dummy\Layers System">
+      <UniqueIdentifier>{55E8BFEC-C149-9DFA-4AB7-E3ACB617D4B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dummy\Layers System\Layer">
+      <UniqueIdentifier>{E1105D09-4DD3-9093-9683-1F2002856971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dummy\Layers System\Layer Stack">
+      <UniqueIdentifier>{57C19C77-C3A4-ABB7-CCA7-D9F3380A7208}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dummy\Log">
       <UniqueIdentifier>{42B1B7AA-AE1B-6C21-F759-1DC763034A76}</UniqueIdentifier>
     </Filter>
@@ -50,6 +59,12 @@
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h">
       <Filter>Dummy\Event\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dummy\Layers System\Layer Stack\LayerStack.h">
+      <Filter>Dummy\Layers System\Layer Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\Layers System\Layer\Layer.h">
+      <Filter>Dummy\Layers System\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dummy\Log\Log.h">
       <Filter>Dummy\Log</Filter>
     </ClInclude>
@@ -64,6 +79,12 @@
     <ClCompile Include="src\DEpch.cpp" />
     <ClCompile Include="src\Dummy\Application\Application.cpp">
       <Filter>Dummy\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dummy\Layers System\Layer Stack\LayerStack.cpp">
+      <Filter>Dummy\Layers System\Layer Stack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dummy\Layers System\Layer\Layer.cpp">
+      <Filter>Dummy\Layers System\Layer</Filter>
     </ClCompile>
     <ClCompile Include="src\Dummy\Log\Log.cpp">
       <Filter>Dummy\Log</Filter>

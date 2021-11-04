@@ -1,6 +1,6 @@
 ﻿#pragma once
+#include "Dummy/Event/Event.h"
 
-#include "Dummy.h"
 
 namespace Dummy
 {
