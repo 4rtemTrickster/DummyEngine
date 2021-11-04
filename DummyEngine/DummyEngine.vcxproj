@@ -158,6 +158,8 @@
     <ClInclude Include="src\Dummy\Event\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Dummy\Event\Events\KeyEvent.h" />
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h" />
+    <ClInclude Include="src\Dummy\Layers System\Layer Stack\LayerStack.h" />
+    <ClInclude Include="src\Dummy\Layers System\Layer\Layer.h" />
     <ClInclude Include="src\Dummy\Log\Log.h" />
     <ClInclude Include="src\Dummy\Window\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -167,6 +169,8 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Dummy\Application\Application.cpp" />
+    <ClCompile Include="src\Dummy\Layers System\Layer Stack\LayerStack.cpp" />
+    <ClCompile Include="src\Dummy\Layers System\Layer\Layer.cpp" />
     <ClCompile Include="src\Dummy\Log\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
