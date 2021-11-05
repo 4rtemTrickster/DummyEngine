@@ -7,6 +7,7 @@
 #include "Dummy/Event/Events/KeyEvent.h"
 #include "Dummy/Event/Events/MouseEvent.h"
 #include "Dummy/Log/Log.h"
+#include "glad/glad.h"
 
 namespace Dummy
 {
@@ -53,6 +54,10 @@ namespace Dummy
         Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), Data.Title.c_str(),
                                   nullptr, nullptr);
         glfwMakeContextCurrent(Window);
+
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        DE_CORE_ASSERT(status, "Failed to initialize Glad!");
+        
         glfwSetWindowUserPointer(Window, &Data);
         SetVSync(true);
 
