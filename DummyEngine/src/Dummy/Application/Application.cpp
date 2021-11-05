@@ -2,6 +2,8 @@
 
 #include "Application.h"
 
+#include "glad/glad.h"
+
 
 namespace Dummy
 {
@@ -24,6 +26,9 @@ namespace Dummy
     {
         while(bRunning)
         {
+            glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();
 
