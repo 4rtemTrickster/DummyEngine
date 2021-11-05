@@ -24,6 +24,9 @@ namespace Dummy
         void PushLayer(Layer* layer);
         void PushOverlay(Layer* overlay);
 
+        inline static Application& Get() { return *Instance; }
+        inline Window& GetWindow() { return *window; }
+
     protected:
 
         bool OnWindowClose(WindowCloseEvent& e);
@@ -32,6 +35,9 @@ namespace Dummy
         bool bRunning = true;
 
         LayerStack Layer_Stack;
+
+        //===========================
+        static Application* Instance;
     };
 
     

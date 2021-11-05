@@ -3,7 +3,11 @@
 
 class SandboxApp : public Dummy::Application
 {
-	
+public:
+	SandboxApp()
+	{
+		PushOverlay(new Dummy::ImGuiLayer);
+	}
 };
 
 Dummy::Application* Dummy::CreateApplication()

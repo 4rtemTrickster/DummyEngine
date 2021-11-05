@@ -1,13 +1,17 @@
 #include "DEpch.h"
+
 #include "Application.h"
 
 
 namespace Dummy
 {
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+    Application* Application::Instance = nullptr;
     
     Application::Application()
     {
+        DE_CORE_ASSERT(!Instance, "Application already exists!");
+        Instance = this;
+        
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
     }
@@ -45,11 +49,13 @@ namespace Dummy
     void Application::PushLayer(Layer* layer)
     {
         Layer_Stack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer* overlay)
     {
         Layer_Stack.PushOverlay(overlay);
+        overlay->OnAttach();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e)
