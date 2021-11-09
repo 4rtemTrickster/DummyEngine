@@ -160,6 +160,8 @@
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h" />
     <ClInclude Include="src\Dummy\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Dummy\Input\Input.h" />
+    <ClInclude Include="src\Dummy\Key &amp; MouseCodes\KeyCodes.h" />
+    <ClInclude Include="src\Dummy\Key &amp; MouseCodes\MouseCodes.h" />
     <ClInclude Include="src\Dummy\Layers System\Layer Stack\LayerStack.h" />
     <ClInclude Include="src\Dummy\Layers System\Layer\Layer.h" />
     <ClInclude Include="src\Dummy\Log\Log.h" />

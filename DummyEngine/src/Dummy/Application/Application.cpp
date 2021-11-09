@@ -34,8 +34,6 @@ namespace Dummy
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();
 
-            DE_CORE_TRACE("{0}", Input::IsKeyPressed(32));
-
             
             window->OnUpdate();
         }
