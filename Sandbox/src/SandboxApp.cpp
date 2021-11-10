@@ -1,16 +1,19 @@
 #include "Dummy.h"
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Dummy::Layer
 {
 public:
 	ExampleLayer()
-		:	Layer("Exa,ple layer") {}
+		:	Layer("Example layer") {}
 
 	void OnImGuiRender() override
 	{
-		if(Dummy::Input::IsKeyPressed(DE_KEY_SPACE))
-			DE_INFO("Space key is pressed");
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");\
+		ImGui::End();
 	}
+
 };
 
 

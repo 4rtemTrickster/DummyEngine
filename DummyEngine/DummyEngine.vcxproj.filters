@@ -16,6 +16,9 @@
     <Filter Include="Dummy\ImGui">
       <UniqueIdentifier>{DB2E3137-47E4-A92C-D0D8-A3033C8DA030}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dummy\ImGui\Layer">
+      <UniqueIdentifier>{E7A3265C-53BA-24F2-9C31-B0130887F579}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dummy\Input">
       <UniqueIdentifier>{B0693237-1C1F-AB2C-A513-A50311C8A130}</UniqueIdentifier>
     </Filter>
@@ -39,9 +42,6 @@
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
@@ -77,8 +77,8 @@
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h">
       <Filter>Dummy\Event\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dummy\ImGui\ImGuiLayer.h">
-      <Filter>Dummy\ImGui</Filter>
+    <ClInclude Include="src\Dummy\ImGui\Layer\ImGuiLayer.h">
+      <Filter>Dummy\ImGui\Layer</Filter>
     </ClInclude>
     <ClInclude Include="src\Dummy\Input\Input.h">
       <Filter>Dummy\Input</Filter>
@@ -101,12 +101,6 @@
     <ClInclude Include="src\Dummy\Window\Window.h">
       <Filter>Dummy\Window</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h">
-      <Filter>Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h">
-      <Filter>Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\Windows\Input\WindowsInput.h">
       <Filter>Platform\Windows\Input</Filter>
     </ClInclude>
@@ -119,8 +113,11 @@
     <ClCompile Include="src\Dummy\Application\Application.cpp">
       <Filter>Dummy\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dummy\ImGui\ImGuiLayer.cpp">
+    <ClCompile Include="src\Dummy\ImGui\ImGuiBuild.cpp">
       <Filter>Dummy\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dummy\ImGui\Layer\ImGuiLayer.cpp">
+      <Filter>Dummy\ImGui\Layer</Filter>
     </ClCompile>
     <ClCompile Include="src\Dummy\Layers System\Layer Stack\LayerStack.cpp">
       <Filter>Dummy\Layers System\Layer Stack</Filter>
@@ -130,9 +127,6 @@
     </ClCompile>
     <ClCompile Include="src\Dummy\Log\Log.cpp">
       <Filter>Dummy\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
-      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\Input\WindowsInput.cpp">
       <Filter>Platform\Windows\Input</Filter>
