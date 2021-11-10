@@ -6,7 +6,7 @@ public:
 	ExampleLayer()
 		:	Layer("Exa,ple layer") {}
 
-	void OnUpdate() override
+	void OnImGuiRender() override
 	{
 		if(Dummy::Input::IsKeyPressed(DE_KEY_SPACE))
 			DE_INFO("Space key is pressed");
@@ -20,7 +20,7 @@ public:
 	SandboxApp()
 	{
 		PushLayer(new ExampleLayer);
-		PushOverlay(new Dummy::ImGuiLayer);
+		
 	}
 };
 

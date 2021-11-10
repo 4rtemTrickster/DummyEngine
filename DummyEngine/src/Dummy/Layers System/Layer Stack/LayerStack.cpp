@@ -5,7 +5,6 @@ namespace Dummy
 {
     LayerStack::LayerStack()
     {
-        LayersInsert = Layers.begin();
     }
 
     LayerStack::~LayerStack()
@@ -16,7 +15,7 @@ namespace Dummy
 
     void LayerStack::PushLayer(Layer* layer)
     {
-        LayersInsert = Layers.emplace(LayersInsert, layer);
+        Layers.emplace(Layers.begin() + LayersInsertIndex++, layer);
     }
 
     void LayerStack::PushOverlay(Layer* overlay)
@@ -31,7 +30,7 @@ namespace Dummy
         if(it != Layers.end())
         {
             Layers.erase(it);
-            --LayersInsert;
+            --LayersInsertIndex;
         }
     }
 

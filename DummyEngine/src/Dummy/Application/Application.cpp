@@ -18,6 +18,9 @@ namespace Dummy
         
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
+
+        imGuiLayer = new ImGuiLayer();
+        PushOverlay(imGuiLayer);
     }
 
     Application::~Application()
@@ -34,6 +37,11 @@ namespace Dummy
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();
 
+
+            imGuiLayer->Begin();
+            for(Layer* layer : Layer_Stack)
+                layer->OnImGuiRender();
+            imGuiLayer->End();
             
             window->OnUpdate();
         }

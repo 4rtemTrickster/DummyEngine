@@ -4,6 +4,7 @@
 #include "Dummy/Log/Log.h"
 #include "Dummy/Window/Window.h"
 #include "Dummy/Event/Events/ApplicationEvent.h"
+#include "Dummy/ImGui/Layer/ImGuiLayer.h"
 #include "Dummy/Layers System/Layer Stack/LayerStack.h"
 #include "Dummy/Layers System/Layer/Layer.h"
 
@@ -32,6 +33,7 @@ namespace Dummy
         bool OnWindowClose(WindowCloseEvent& e);
         
         std::unique_ptr<Window> window;
+        ImGuiLayer* imGuiLayer;
         bool bRunning = true;
 
         LayerStack Layer_Stack;
