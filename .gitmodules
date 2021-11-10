@@ -7,3 +7,6 @@
 [submodule "DummyEngine/vendor/imgui"]
 	path = DummyEngine/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "DummyEngine/vendor/glm"]
+	path = DummyEngine/vendor/glm
+	url = https://github.com/g-truc/glm
