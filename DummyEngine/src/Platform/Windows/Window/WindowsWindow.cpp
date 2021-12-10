@@ -7,7 +7,7 @@
 #include "Dummy/Event/Events/KeyEvent.h"
 #include "Dummy/Event/Events/MouseEvent.h"
 #include "Dummy/Log/Log.h"
-#include "glad/glad.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Dummy
 {
@@ -53,10 +53,9 @@ namespace Dummy
 
         Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), Data.Title.c_str(),
                                   nullptr, nullptr);
-        glfwMakeContextCurrent(Window);
 
-        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        DE_CORE_ASSERT(status, "Failed to initialize Glad!");
+        Context = new OpenGLContext(Window);
+        Context->Init();
         
         glfwSetWindowUserPointer(Window, &Data);
         SetVSync(true);
@@ -162,7 +161,7 @@ namespace Dummy
     void WindowsWindow::OnUpdate()
     {
         glfwPollEvents();
-        glfwSwapBuffers(Window);
+        Context->SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled)
