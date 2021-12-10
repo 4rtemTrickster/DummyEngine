@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Dummy/Renderer/GraphicsContext/GraphicsContext.h"
+
 namespace Dummy
 {
     class WindowsWindow : public Window
@@ -29,6 +31,7 @@ namespace Dummy
         virtual void Shutdown();
 
         GLFWwindow* Window;
+        GraphicsContext* Context;
 
         struct WindowData
         {
