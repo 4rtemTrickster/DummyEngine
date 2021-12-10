@@ -33,7 +33,17 @@
 
 .vs
 .idea
-bin/
+
+# Binaries
+**/bin/
 bin-int/
 
-*.user
+# Hazel files
+*.log
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
