@@ -38,6 +38,8 @@ namespace Dummy
 
         LayerStack Layer_Stack;
 
+        uint VertexArray, VertexBuffer, IndexBuffer;
+
         //===========================
         static Application* Instance;
     };
