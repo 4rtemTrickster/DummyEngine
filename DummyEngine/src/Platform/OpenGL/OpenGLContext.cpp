@@ -19,6 +19,11 @@ namespace Dummy
 
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         DE_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+        DE_CORE_INFO("OpenGL info:");
+        DE_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
+        DE_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
+        DE_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
     }
 
     void OpenGLContext::SwapBuffers()
