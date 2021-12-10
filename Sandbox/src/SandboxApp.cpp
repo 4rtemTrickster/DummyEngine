@@ -1,18 +1,10 @@
 #include "Dummy.h"
-#include "imgui/imgui.h"
 
 class ExampleLayer : public Dummy::Layer
 {
 public:
 	ExampleLayer()
-		:	Layer("Example layer") {}
-
-	void OnImGuiRender() override
-	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World!");\
-		ImGui::End();
-	}
+		:	Layer("Example layer") {} 
 
 };
 
