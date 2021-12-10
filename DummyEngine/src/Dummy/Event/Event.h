@@ -22,6 +22,7 @@ namespace Dummy
 
         ET_KeyPressed,
         ET_KeyReleased,
+        ET_KeyTyped,
 
         ET_MouseButtonPressed,
         ET_MouseButtonReleased,

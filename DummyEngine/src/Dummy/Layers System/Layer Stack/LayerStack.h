@@ -19,7 +19,7 @@ namespace Dummy
 
     protected:
         std::vector<Layer*> Layers;
-        std::vector<Layer*>::iterator LayersInsert;
+        size_t LayersInsertIndex = 0;
     };
     
 }

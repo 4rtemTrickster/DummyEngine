@@ -1,15 +1,26 @@
 #include "DEpch.h"
+
 #include "Application.h"
+
+
+#include "Dummy/Input/Input.h"
+#include "glad/glad.h"
 
 
 namespace Dummy
 {
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+    Application* Application::Instance = nullptr;
     
     Application::Application()
     {
+        DE_CORE_ASSERT(!Instance, "Application already exists!");
+        Instance = this;
+        
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
+
+        imGuiLayer = new ImGuiLayer();
+        PushOverlay(imGuiLayer);
     }
 
     Application::~Application()
@@ -20,9 +31,17 @@ namespace Dummy
     {
         while(bRunning)
         {
+            glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();
 
+
+            imGuiLayer->Begin();
+            for(Layer* layer : Layer_Stack)
+                layer->OnImGuiRender();
+            imGuiLayer->End();
             
             window->OnUpdate();
         }
@@ -45,11 +64,13 @@ namespace Dummy
     void Application::PushLayer(Layer* layer)
     {
         Layer_Stack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer* overlay)
     {
         Layer_Stack.PushOverlay(overlay);
+        overlay->OnAttach();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e)

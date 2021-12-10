@@ -13,6 +13,18 @@
     <Filter Include="Dummy\Event\Events">
       <UniqueIdentifier>{A630372F-9214-F884-FB74-F2D7E777E206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dummy\ImGui">
+      <UniqueIdentifier>{DB2E3137-47E4-A92C-D0D8-A3033C8DA030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dummy\ImGui\Layer">
+      <UniqueIdentifier>{E7A3265C-53BA-24F2-9C31-B0130887F579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dummy\Input">
+      <UniqueIdentifier>{B0693237-1C1F-AB2C-A513-A50311C8A130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dummy\Key & MouseCodes">
+      <UniqueIdentifier>{26C1D09B-12BB-F9ED-FB27-90FEE7C05F5A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dummy\Layers System">
       <UniqueIdentifier>{55E8BFEC-C149-9DFA-4AB7-E3ACB617D4B9}</UniqueIdentifier>
     </Filter>
@@ -33,6 +45,12 @@
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows\Input">
+      <UniqueIdentifier>{63A6717E-4FA0-9AD0-380D-31E124A6003D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows\Window">
+      <UniqueIdentifier>{CBCFF26C-3707-3B04-4011-9F27ACC761FD}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +77,18 @@
     <ClInclude Include="src\Dummy\Event\Events\MouseEvent.h">
       <Filter>Dummy\Event\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dummy\ImGui\Layer\ImGuiLayer.h">
+      <Filter>Dummy\ImGui\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\Input\Input.h">
+      <Filter>Dummy\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\Key & MouseCodes\KeyCodes.h">
+      <Filter>Dummy\Key & MouseCodes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dummy\Key & MouseCodes\MouseCodes.h">
+      <Filter>Dummy\Key & MouseCodes</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dummy\Layers System\Layer Stack\LayerStack.h">
       <Filter>Dummy\Layers System\Layer Stack</Filter>
     </ClInclude>
@@ -71,14 +101,23 @@
     <ClInclude Include="src\Dummy\Window\Window.h">
       <Filter>Dummy\Window</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Platform\Windows</Filter>
+    <ClInclude Include="src\Platform\Windows\Input\WindowsInput.h">
+      <Filter>Platform\Windows\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\Window\WindowsWindow.h">
+      <Filter>Platform\Windows\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DEpch.cpp" />
     <ClCompile Include="src\Dummy\Application\Application.cpp">
       <Filter>Dummy\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dummy\ImGui\ImGuiBuild.cpp">
+      <Filter>Dummy\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dummy\ImGui\Layer\ImGuiLayer.cpp">
+      <Filter>Dummy\ImGui\Layer</Filter>
     </ClCompile>
     <ClCompile Include="src\Dummy\Layers System\Layer Stack\LayerStack.cpp">
       <Filter>Dummy\Layers System\Layer Stack</Filter>
@@ -89,8 +128,11 @@
     <ClCompile Include="src\Dummy\Log\Log.cpp">
       <Filter>Dummy\Log</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Platform\Windows</Filter>
+    <ClCompile Include="src\Platform\Windows\Input\WindowsInput.cpp">
+      <Filter>Platform\Windows\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\Window\WindowsWindow.cpp">
+      <Filter>Platform\Windows\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

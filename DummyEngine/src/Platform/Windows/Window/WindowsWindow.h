@@ -22,6 +22,8 @@ namespace Dummy
         void SetVSync(bool enabled) override;
         bool IsVSync() const override;
 
+        inline virtual void* GetNativeWindow() const override { return Window; }
+
     protected:
         virtual void Init(const WindowProps& props);
         virtual void Shutdown();
