@@ -10,6 +10,7 @@
 #include "Dummy/Renderer/Buffers/IndexBuffer/IndexBuffer.h"
 #include "Dummy/Renderer/Buffers/VertexBuffer/VertexBuffer.h"
 #include "Dummy/Renderer/Shader/Shader.h"
+#include "Dummy/Renderer/VertexArray/VertexArray.h"
 
 namespace Dummy
 {
@@ -41,10 +42,8 @@ namespace Dummy
 
         LayerStack Layer_Stack;
 
-        unsigned int VertexArray_;
-        std::unique_ptr<Shader> shader_;
-        std::unique_ptr<VertexBuffer> VertexBuffer_;
-        std::unique_ptr<IndexBuffer> IndexBuffer_;
+        std::shared_ptr<VertexArray> VertexArray_;
+        std::shared_ptr<Shader> shader_;
 
         //===========================
         static Application* Instance;

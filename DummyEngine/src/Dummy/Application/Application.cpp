@@ -12,30 +12,6 @@
 namespace Dummy
 {
     Application* Application::Instance = nullptr;
-
-    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-    {
-        switch (type)
-        {
-        case ShaderDataType::FLOAT:   return GL_FLOAT;
-        case ShaderDataType::FLOAT2:  return GL_FLOAT;
-        case ShaderDataType::FLOAT3:  return GL_FLOAT;
-        case ShaderDataType::FLOAT4:  return GL_FLOAT;
-            
-        case ShaderDataType::INT:     return GL_INT;
-        case ShaderDataType::INT2:    return GL_INT;
-        case ShaderDataType::INT3:    return GL_INT;
-        case ShaderDataType::INT4:    return GL_INT;
-            
-        case ShaderDataType::MAT3:    return GL_FLOAT;
-        case ShaderDataType::MAT4:    return GL_FLOAT;
-            
-        case ShaderDataType::BOOL:    return GL_BOOL;
-        }
-
-        DE_CORE_ASSERT(false, "Unknown ShaderDataType!");
-        return 0;
-    }
     
     Application::Application()
     {
@@ -47,10 +23,8 @@ namespace Dummy
 
         imGuiLayer = new ImGuiLayer();
         PushOverlay(imGuiLayer);
-
-        glGenVertexArrays(1, &VertexArray_);
-        glBindVertexArray(VertexArray_);
-
+        
+        VertexArray_.reset(VertexArray::Create());
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.0f, 0.0f, 1.0f,
@@ -58,36 +32,23 @@ namespace Dummy
              0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 0.8f, 1.0f
         };
 
-        VertexBuffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+        std::shared_ptr<VertexBuffer> VB;
+        VB.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-        {
-            BufferLayout layout =
+        VB->SetLayout(
             {
                 { ShaderDataType::FLOAT3, "a_Position" },
                 { ShaderDataType::FLOAT4, "a_Color" }
-            };
-            
-            VertexBuffer_->SetLayout(layout);
-        }
+            });
 
-
-        uint32_t index = 0;
-        for (const auto& element : VertexBuffer_->GetLayout())
-        {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(
-                index,
-                element.GetComponentCount(),
-                ShaderDataTypeToOpenGLBaseType(element.Type),
-                element.Normalized ? GL_TRUE : GL_FALSE,
-                VertexBuffer_->GetLayout().GetStride(),
-                reinterpret_cast<const void*>(element.Offset));
-            
-            ++index;
-        }
+        VertexArray_->AddVertexBuffer(VB);
+        
 
         unsigned int indices[3] = {0, 1, 2};
-        IndexBuffer_.reset(IndexBuffer::Create(indices, 3));
+        std::shared_ptr<IndexBuffer> IB;
+        IB.reset(IndexBuffer::Create(indices, 3));
+
+        VertexArray_->SetIndexBuffer(IB);
 
         std::string vertexSrc = R"(
             #version 330 core
@@ -131,8 +92,8 @@ namespace Dummy
             glClear(GL_COLOR_BUFFER_BIT);
 
             shader_->Bind();
-            glBindVertexArray(VertexArray_);
-            glDrawElements(GL_TRIANGLES, IndexBuffer_->GetCount(), GL_UNSIGNED_INT, nullptr);
+            VertexArray_->Bind();
+            glDrawElements(GL_TRIANGLES, VertexArray_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
             
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();

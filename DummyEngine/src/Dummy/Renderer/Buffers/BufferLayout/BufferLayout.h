@@ -46,7 +46,7 @@ namespace Dummy
         BufferLayout() {}
         BufferLayout(const std::initializer_list<BufferElement>& elements);
         
-        inline const std::vector<BufferElement>& GetElements() { return BufferElements; }
+        inline const std::vector<BufferElement>& GetElements() const { return BufferElements; }
         inline uint32_t GetStride() const { return Stride; }
 
         std::vector<BufferElement>::iterator begin() { return BufferElements.begin(); }
