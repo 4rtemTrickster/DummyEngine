@@ -7,7 +7,7 @@
 #include "Dummy/Event/Events/KeyEvent.h"
 #include "Dummy/Event/Events/MouseEvent.h"
 #include "Dummy/Log/Log.h"
-#include "Platform/OpenGL/OpenGLContext.h"
+#include "Platform/OpenGL/Renderer/GraphicsContext/OpenGLContext.h"
 
 namespace Dummy
 {
