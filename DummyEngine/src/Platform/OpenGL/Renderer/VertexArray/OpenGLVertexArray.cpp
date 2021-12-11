@@ -34,6 +34,11 @@ namespace Dummy
         glCreateVertexArrays(1, &RendererID);
     }
 
+    OpenGLVertexArray::~OpenGLVertexArray()
+    {
+        glDeleteVertexArrays(1, &RendererID);
+    }
+
     void OpenGLVertexArray::Bind() const
     {
         glBindVertexArray(RendererID);

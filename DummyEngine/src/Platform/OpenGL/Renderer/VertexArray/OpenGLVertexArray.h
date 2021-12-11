@@ -7,7 +7,7 @@ namespace Dummy
     {
     public:
         OpenGLVertexArray();
-        virtual ~OpenGLVertexArray() override {}
+        virtual ~OpenGLVertexArray() override;
         
         void Bind() const override;
         void Unbind() const override;
