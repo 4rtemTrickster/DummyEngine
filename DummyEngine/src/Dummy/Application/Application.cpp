@@ -60,14 +60,19 @@ namespace Dummy
 
         VertexBuffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-        BufferLayout layout =
         {
-            { ShaderDataType::FLOAT3, "a_Position" },
-            { ShaderDataType::FLOAT4, "a_Color"}
-        };
+            BufferLayout layout =
+            {
+                { ShaderDataType::FLOAT3, "a_Position" },
+                { ShaderDataType::FLOAT4, "a_Color" }
+            };
+            
+            VertexBuffer_->SetLayout(layout);
+        }
+
 
         uint32_t index = 0;
-        for (const auto& element : layout)
+        for (const auto& element : VertexBuffer_->GetLayout())
         {
             glEnableVertexAttribArray(index);
             glVertexAttribPointer(
@@ -75,7 +80,7 @@ namespace Dummy
                 element.GetComponentCount(),
                 ShaderDataTypeToOpenGLBaseType(element.Type),
                 element.Normalized ? GL_TRUE : GL_FALSE,
-                layout.GetStride(),
+                VertexBuffer_->GetLayout().GetStride(),
                 reinterpret_cast<const void*>(element.Offset));
             
             ++index;

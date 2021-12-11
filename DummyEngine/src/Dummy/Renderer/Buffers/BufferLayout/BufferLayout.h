@@ -51,6 +51,8 @@ namespace Dummy
 
         std::vector<BufferElement>::iterator begin() { return BufferElements.begin(); }
         std::vector<BufferElement>::iterator end() { return BufferElements.end(); }
+        std::vector<BufferElement>::const_iterator begin() const { return BufferElements.cbegin(); }
+        std::vector<BufferElement>::const_iterator end() const { return BufferElements.cend(); }
     protected:
 
         void CalculateOffsetsAndStride();
