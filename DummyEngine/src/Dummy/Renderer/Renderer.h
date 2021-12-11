@@ -1,19 +1,17 @@
 ﻿#pragma once
+#include "RendererAPI.h"
 
 namespace Dummy
 {
-    enum class RendererAPI
-    {
-        NONE     = 0,
-        OPENGL   = 1,
-        DIRECT3D = 2 // :)
-    };
-        
     class Renderer
     {
     public:
-        inline static RendererAPI GetCurrentRendererAPI() { return CurrentRendererAPI; }
-    protected:
-        static RendererAPI CurrentRendererAPI;
+        static void BeginScene(); //TODO: Scene params
+        static void EndScene();
+
+        static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+        
+        inline static RendererAPI::API GetCurrentRendererAPI() { return RendererAPI::GetCurrentAPI(); }
+
     };
 }

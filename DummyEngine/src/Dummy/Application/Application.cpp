@@ -4,9 +4,10 @@
 
 
 #include "Dummy/Input/Input.h"
+#include "Dummy/Renderer/Renderer.h"
 #include "Dummy/Renderer/Buffers/BufferLayout/BufferLayout.h"
 #include "Dummy/Renderer/Buffers/VertexBuffer/VertexBuffer.h"
-#include "glad/glad.h"
+#include "Dummy/Renderer/RenderCommand/RenderCommand.h"
 
 
 namespace Dummy
@@ -88,16 +89,16 @@ namespace Dummy
     {
         while(bRunning)
         {
-            glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
+            RenderCommand::Clear();
 
             shader_->Bind();
-            VertexArray_->Bind();
-            glDrawElements(GL_TRIANGLES, VertexArray_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-            
+            Renderer::BeginScene();
+            Renderer::Submit( VertexArray_);
+            Renderer::EndScene();
+          
             for(Layer* layer : Layer_Stack)
                 layer->OnUpdate();
-
 
             imGuiLayer->Begin();
             for(Layer* layer : Layer_Stack)
