@@ -4,6 +4,7 @@
 
 
 #include "Dummy/Input/Input.h"
+#include "Dummy/Renderer/Buffers/BufferLayout/BufferLayout.h"
 #include "Dummy/Renderer/Buffers/VertexBuffer/VertexBuffer.h"
 #include "glad/glad.h"
 
@@ -11,6 +12,30 @@
 namespace Dummy
 {
     Application* Application::Instance = nullptr;
+
+    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+    {
+        switch (type)
+        {
+        case ShaderDataType::FLOAT:   return GL_FLOAT;
+        case ShaderDataType::FLOAT2:  return GL_FLOAT;
+        case ShaderDataType::FLOAT3:  return GL_FLOAT;
+        case ShaderDataType::FLOAT4:  return GL_FLOAT;
+            
+        case ShaderDataType::INT:     return GL_INT;
+        case ShaderDataType::INT2:    return GL_INT;
+        case ShaderDataType::INT3:    return GL_INT;
+        case ShaderDataType::INT4:    return GL_INT;
+            
+        case ShaderDataType::MAT3:    return GL_FLOAT;
+        case ShaderDataType::MAT4:    return GL_FLOAT;
+            
+        case ShaderDataType::BOOL:    return GL_BOOL;
+        }
+
+        DE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+        return 0;
+    }
     
     Application::Application()
     {
@@ -27,16 +52,34 @@ namespace Dummy
         glBindVertexArray(VertexArray_);
 
 
-        float vertices[3 * 3] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
+        float vertices[3 * 7] = {
+            -0.5f, -0.5f, 0.0f, 0.8f, 0.0f, 0.0f, 1.0f,
+             0.5f, -0.5f, 0.0f, 0.0f, 0.8f, 0.0f, 1.0f,
+             0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 0.8f, 1.0f
         };
 
         VertexBuffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-        
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+        BufferLayout layout =
+        {
+            { ShaderDataType::FLOAT3, "a_Position" },
+            { ShaderDataType::FLOAT4, "a_Color"}
+        };
+
+        uint32_t index = 0;
+        for (const auto& element : layout)
+        {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(
+                index,
+                element.GetComponentCount(),
+                ShaderDataTypeToOpenGLBaseType(element.Type),
+                element.Normalized ? GL_TRUE : GL_FALSE,
+                layout.GetStride(),
+                reinterpret_cast<const void*>(element.Offset));
+            
+            ++index;
+        }
 
         unsigned int indices[3] = {0, 1, 2};
         IndexBuffer_.reset(IndexBuffer::Create(indices, 3));
@@ -45,12 +88,13 @@ namespace Dummy
             #version 330 core
     
             layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec4 a_Color;
 
-            out vec3 v_Position;
+            out vec4 v_Color;
     
             void main()
             {
-                v_Position = a_Position;
+                v_Color = a_Color;
                 gl_Position = vec4(a_Position, 1.0);
             }
         )";
@@ -59,11 +103,11 @@ namespace Dummy
             #version 330 core
     
             layout(location = 0) out vec4 color;
-            in vec3 v_Position;
+            in vec4 v_Color;
     
             void main()
             {
-                color = vec4(v_Position * 0.5 + 0.5, 1.0);
+                color = v_Color;
             }
         )";
 
