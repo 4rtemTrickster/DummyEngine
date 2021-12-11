@@ -7,6 +7,7 @@
 #include "Dummy/ImGui/Layer/ImGuiLayer.h"
 #include "Dummy/Layers System/Layer Stack/LayerStack.h"
 #include "Dummy/Layers System/Layer/Layer.h"
+#include "Dummy/Renderer/Shader/Shader.h"
 
 namespace Dummy
 {
@@ -38,7 +39,8 @@ namespace Dummy
 
         LayerStack Layer_Stack;
 
-        uint VertexArray, VertexBuffer, IndexBuffer;
+        unsigned int VertexArray, VertexBuffer, IndexBuffer;
+        std::unique_ptr<Shader> shader_;
 
         //===========================
         static Application* Instance;

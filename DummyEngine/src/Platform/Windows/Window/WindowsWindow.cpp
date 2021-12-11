@@ -107,7 +107,7 @@ namespace Dummy
             }
         });
 
-        glfwSetCharCallback(Window, [](GLFWwindow* window, uint keycode)
+        glfwSetCharCallback(Window, [](GLFWwindow* window, unsigned int keycode)
         {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
