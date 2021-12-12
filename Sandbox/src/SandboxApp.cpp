@@ -9,7 +9,7 @@ public:
     {
         CameraPitch = Camera_.GetRotationPitch();
         CameraYaw = Camera_.GetRotationYaw();
-        
+
         VertexArray_.reset(Dummy::VertexArray::Create());
 
         float vertices[24 * 7] = {
@@ -120,11 +120,14 @@ public:
 
     void OnUpdate() override
     {
-        if(Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += CameraSpeed * Camera_.GetForwardVector();
-        if(Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= CameraSpeed * Camera_.GetForwardVector();
-        if(Dummy::Input::IsKeyPressed(DE_KEY_D)) CameraPosition += glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
-        if(Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -= glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
-        
+        if (Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += CameraSpeed * Camera_.GetForwardVector();
+        else if (Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= CameraSpeed * Camera_.GetForwardVector();
+
+        if (Dummy::Input::IsKeyPressed(DE_KEY_D)) CameraPosition +=
+            glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+        else if (Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -=
+            glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+
         Dummy::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
         Dummy::RenderCommand::Clear();
 
@@ -140,7 +143,6 @@ public:
 
     void OnImGuiRender() override
     {
-
     }
 
     void OnEvent(Dummy::Event& event) override
@@ -156,7 +158,7 @@ public:
         switch (event.GetKeyCode())
         {
         }
- 
+
         return true;
     }
 
@@ -166,8 +168,8 @@ public:
 
         static float lastX;
         static float lastY;
- 
-        if(first)
+
+        if (first)
         {
             lastX = event.GetX();
             lastY = event.GetY();
@@ -175,20 +177,20 @@ public:
         }
 
         float xoffset = event.GetX() - lastX;
-        float yoffset = lastY - event.GetY(); 
+        float yoffset = lastY - event.GetY();
         lastX = event.GetX();
         lastY = event.GetY();
 
-        float sensitivity = 0.1f;
+        float sensitivity = 0.25f;
         xoffset *= sensitivity;
         yoffset *= sensitivity;
 
         CameraYaw += xoffset;
         CameraPitch += yoffset;
 
-        if(CameraPitch > 89.0f)
+        if (CameraPitch > 89.0f)
             CameraPitch = 89.0f;
-        if(CameraPitch < -89.0f)
+        if (CameraPitch < -89.0f)
             CameraPitch = -89.0f;
 
         Camera_.SetPosition(CameraPosition);
@@ -205,7 +207,7 @@ protected:
 
     Dummy::Camera Camera_;
 
-    glm::vec3 CameraPosition = glm::vec3(0.0f,0.0f,3.0f);
+    glm::vec3 CameraPosition = glm::vec3(0.0f, 0.0f, 3.0f);
     float CameraYaw;
     float CameraPitch;
     float CameraSpeed = 0.05f;
