@@ -2,7 +2,10 @@
 
 #include "Application.h"
 
+#include <glm/gtc/type_ptr.inl>
 
+
+#include "imgui.h"
 #include "Dummy/Input/Input.h"
 #include "Dummy/Renderer/Renderer.h"
 #include "Dummy/Renderer/Buffers/BufferLayout/BufferLayout.h"
@@ -15,7 +18,7 @@ namespace Dummy
     Application* Application::Instance = nullptr;
     
     Application::Application()
-        :   Camera_({0.0f, 0.0f, -5.0f})
+        :   Camera_({0.0f, 0.0f, -3.0f})
     {
         DE_CORE_ASSERT(!Instance, "Application already exists!");
         Instance = this;
@@ -28,11 +31,37 @@ namespace Dummy
         
         VertexArray_.reset(VertexArray::Create());
 
-        float vertices[4 * 7] = {
-            -0.5f, -0.5f, 0.0f,     0.8f, 0.0f, 0.0f, 1.0f,
-             0.5f, -0.5f, 0.0f,     0.0f, 0.8f, 0.0f, 1.0f,
-             0.5f,  0.5f, 0.0f,     0.8f, 0.0f, 0.0f, 1.0f,
-            -0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 0.8f, 1.0f
+        float vertices[24 * 7] = {
+             0.5f, -0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,   // 0
+            -0.5f, -0.5f, -0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	  // 1
+            -0.5f,  0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	  // 2
+             0.5f,  0.5f, -0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	  // 3
+        
+            // Front
+            -0.5f, -0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	 // 4
+             0.5f, -0.5f,  0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	 // 5
+             0.5f,  0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	 // 6
+            -0.5f,  0.5f,  0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	 // 7
+            // Left
+            -0.5f, -0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 8
+            -0.5f, -0.5f,  0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	// 9
+            -0.5f,  0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 10
+            -0.5f,  0.5f, -0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	// 11
+            // Right
+             0.5f, -0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 12
+             0.5f, -0.5f, -0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	// 13
+             0.5f,  0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 14
+             0.5f,  0.5f,  0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	// 15
+            // Bottom
+            -0.5f, -0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 16
+             0.5f, -0.5f, -0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	// 17
+             0.5f, -0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 18
+            -0.5f, -0.5f,  0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	// 19
+            // Top
+            -0.5f,  0.5f,  0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 20
+             0.5f,  0.5f,  0.5f,    0.0f, 0.8f, 0.0f, 1.0f,	// 21
+             0.5f,  0.5f, -0.5f,    0.8f, 0.0f, 0.0f, 1.0f,	// 22
+            -0.5f,  0.5f, -0.5f,    0.0f, 0.0f, 0.8f, 1.0f,	// 23
         };
 
         std::shared_ptr<VertexBuffer> VB;
@@ -47,7 +76,27 @@ namespace Dummy
         VertexArray_->AddVertexBuffer(VB);
         
 
-        std::vector<uint32_t> indices = {0, 1, 2, 0, 2, 3};
+        std::vector<uint32_t> indices =
+        {
+            0,	1,	2,
+            2,	3,	0,
+    
+            4,	5,	6,
+            6,	7,	4,
+    
+            8,	9,	10,
+            10,	11,	8,
+    
+            12, 13, 14,
+            14, 15, 12,
+    
+            16, 17, 18,
+            18, 19, 16,
+    
+            20, 21, 22,
+            22, 23, 20
+        };
+        
         std::shared_ptr<IndexBuffer> IB;
         IB.reset(IndexBuffer::Create(indices.data(), indices.size()));
 
@@ -91,17 +140,25 @@ namespace Dummy
 
     void Application::Run()
     {
+
+        glm::vec3 tmpPosition(0.0f,0.0f,3.0f);
+        float tmpYaw = -90.f;
+        float tmpPitch = 0.0f;
+
+        /////////
+        
         while(bRunning)
         {
+          
             RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
             RenderCommand::Clear();
 
-            Renderer::BeginScene();
+            Camera_.SetPosition(tmpPosition);
+            Camera_.SetRotation(tmpPitch, tmpYaw);
 
-            shader_->Bind();
-            shader_->UploadUniformMat4("u_ViewProjection", Camera_.GetViewProjectionMatrix());
+            Renderer::BeginScene(Camera_);
 
-            Renderer::Submit( VertexArray_);
+            Renderer::Submit(shader_, VertexArray_);
             
             Renderer::EndScene();
           
@@ -109,6 +166,11 @@ namespace Dummy
                 layer->OnUpdate();
 
             imGuiLayer->Begin();
+
+            ImGui::SliderFloat3("Position", &tmpPosition.x, -10.f, 10.f);
+            ImGui::SliderFloat("RotationYaw", &tmpYaw, -180.f, 180.f);
+            ImGui::SliderFloat("RotationPitch", &tmpPitch, -89.f, 89.f);
+            
             for(Layer* layer : Layer_Stack)
                 layer->OnImGuiRender();
             imGuiLayer->End();
