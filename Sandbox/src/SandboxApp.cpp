@@ -135,9 +135,7 @@ public:
 
     void OnImGuiRender() override
     {
-        //ImGui::SliderFloat3("Position", &tmpPosition.x, -10.f, 10.f);
-        //ImGui::SliderFloat( "RotationYaw", &tmpYaw, -180.f, 180.f);
-        //ImGui::SliderFloat( "RotationPitch", &tmpPitch, -89.f, 89.f);
+
     }
 
     void OnEvent(Dummy::Event& event) override
@@ -145,32 +143,58 @@ public:
         Dummy::EventDispatcher dispatcher(event);
 
         dispatcher.Dispatch<Dummy::KeyPressedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+        dispatcher.Dispatch<Dummy::MouseMovedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnMouseMovedEvent));
     }
 
     bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event)
     {
         switch (event.GetKeyCode())
         {
-        case DE_KEY_W:
-            CameraPosition.z -= CameraSpeed;
-            break;
-        case DE_KEY_S:
-            CameraPosition.z += CameraSpeed;
-            break;
-        case DE_KEY_D:
-            CameraPosition.x += CameraSpeed;
-            break;
-        case DE_KEY_A:
-            CameraPosition.x -=CameraSpeed;
-            break;
-        case DE_KEY_SPACE:
-            CameraPosition.y += CameraSpeed;
-            break;
-        case DE_KEY_LEFT_SHIFT:
-            CameraPosition.y -= CameraSpeed;
+        case DE_KEY_W: CameraPosition += CameraSpeed * Camera_.GetForwardVector(); return false;
+        case DE_KEY_S: CameraPosition -= CameraSpeed * Camera_.GetForwardVector(); return false;
+        case DE_KEY_D: CameraPosition += glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed; return false;
+        case DE_KEY_A: CameraPosition -= glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed; return false;
+        }
+ 
+        return true;
+    }
+
+    bool OnMouseMovedEvent(Dummy::MouseMovedEvent& event)
+    {
+        static bool first = true;
+
+        static float lastX;
+        static float lastY;
+ 
+        if(first)
+        {
+            lastX = event.GetX();
+            lastY = event.GetY();
+            first = false;
         }
 
-        
+        float xoffset = event.GetX() - lastX;
+        float yoffset = lastY - event.GetY(); 
+        lastX = event.GetX();
+        lastY = event.GetY();
+
+        float sensitivity = 0.1f;
+        xoffset *= sensitivity;
+        yoffset *= sensitivity;
+
+        CameraYaw += xoffset;
+        CameraPitch += yoffset;
+
+        if(CameraPitch > 89.0f)
+            CameraPitch = 89.0f;
+        if(CameraPitch < -89.0f)
+            CameraPitch = -89.0f;
+
+        Camera_.SetPosition(CameraPosition);
+        Camera_.SetRotation(CameraPitch, CameraYaw);
+
+        Camera_.UpdateCameraVectors();
+
         return false;
     }
 

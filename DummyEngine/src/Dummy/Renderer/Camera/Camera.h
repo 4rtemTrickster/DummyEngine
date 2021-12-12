@@ -18,7 +18,10 @@ namespace Dummy
         const glm::vec3& GetPosition() const { return Position; }
         float GetRotationPitch() const { return Pitch; }
         float GetRotationYaw() const { return Yaw; }
-
+        
+        const glm::vec3& GetForwardVector() const { return Front; }
+        const glm::vec3& GetUpVector() const { return Up; }
+        
         const glm::mat4& GetProjectionMatrix() const { return ProjectionMatrix; }
         const glm::mat4& GetViewMatrix() const { return ViewMatrix; }
         const glm::mat4& GetViewProjectionMatrix() const { return ViewProjectionMatrix; }
