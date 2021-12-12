@@ -118,6 +118,35 @@ public:
         shader_ = std::make_unique<Dummy::Shader>(vertexSrc, fragmentSrc);
     }
 
+    void MoveCamera()
+    {
+        static std::pair<float, float> LastPos;
+        std::pair<float, float> CurrentPos = Dummy::Input::GetMousePos();
+
+        if (static bool first = true)
+        {
+            LastPos = Dummy::Input::GetMousePos();
+            first = false;
+        }
+        
+        // Offset * sensitivity
+        CameraYaw   += (CurrentPos.first - LastPos.first)   * CameraSensitivity;
+        CameraPitch += (LastPos.second - CurrentPos.second) * CameraSensitivity;
+
+        LastPos.first = CurrentPos.first;
+        LastPos.second = CurrentPos.second;
+
+        if (CameraPitch > 89.0f)
+            CameraPitch = 89.0f;
+        if (CameraPitch < -89.0f)
+            CameraPitch = -89.0f;
+
+        Camera_.SetPosition(CameraPosition);
+        Camera_.SetRotation(CameraPitch, CameraYaw);
+
+        Camera_.UpdateCameraVectors();
+    }
+
     void OnUpdate() override
     {
         if (Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += CameraSpeed * Camera_.GetForwardVector();
@@ -127,6 +156,8 @@ public:
             glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
         else if (Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -=
             glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+
+        if(Dummy::Input::IsMouseMoved()) MoveCamera();
 
         Dummy::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
         Dummy::RenderCommand::Clear();
@@ -147,58 +178,10 @@ public:
 
     void OnEvent(Dummy::Event& event) override
     {
-        Dummy::EventDispatcher dispatcher(event);
+        //Dummy::EventDispatcher dispatcher(event);
 
-        dispatcher.Dispatch<Dummy::KeyPressedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
-        dispatcher.Dispatch<Dummy::MouseMovedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnMouseMovedEvent));
-    }
-
-    bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event)
-    {
-        switch (event.GetKeyCode())
-        {
-        }
-
-        return true;
-    }
-
-    bool OnMouseMovedEvent(Dummy::MouseMovedEvent& event)
-    {
-        static bool first = true;
-
-        static float lastX;
-        static float lastY;
-
-        if (first)
-        {
-            lastX = event.GetX();
-            lastY = event.GetY();
-            first = false;
-        }
-
-        float xoffset = event.GetX() - lastX;
-        float yoffset = lastY - event.GetY();
-        lastX = event.GetX();
-        lastY = event.GetY();
-
-        float sensitivity = 0.25f;
-        xoffset *= sensitivity;
-        yoffset *= sensitivity;
-
-        CameraYaw += xoffset;
-        CameraPitch += yoffset;
-
-        if (CameraPitch > 89.0f)
-            CameraPitch = 89.0f;
-        if (CameraPitch < -89.0f)
-            CameraPitch = -89.0f;
-
-        Camera_.SetPosition(CameraPosition);
-        Camera_.SetRotation(CameraPitch, CameraYaw);
-
-        Camera_.UpdateCameraVectors();
-
-        return false;
+        //dispatcher.Dispatch<Dummy::KeyPressedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+        //dispatcher.Dispatch<Dummy::MouseMovedEvent>(DE_BIND_EVENT_FN(ExampleLayer::OnMouseMovedEvent));
     }
 
 protected:
@@ -211,6 +194,7 @@ protected:
     float CameraYaw;
     float CameraPitch;
     float CameraSpeed = 0.05f;
+    float CameraSensitivity = 0.2f;
 };
 
 

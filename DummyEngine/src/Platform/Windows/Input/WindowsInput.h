@@ -8,7 +8,8 @@ namespace Dummy
     {
     public:
         virtual bool IsKeyPressedImpl(int keycode) override;
-        
+
+        bool IsMouseMovedImpl() override;
         virtual bool IsMouseButtonPressedImpl(int button) override;
         virtual std::pair<float, float> GetMousePosImpl() override;
         virtual float GetMouseXImpl() override;
