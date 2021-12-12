@@ -7,11 +7,6 @@
 #include "Dummy/ImGui/Layer/ImGuiLayer.h"
 #include "Dummy/Layers System/Layer Stack/LayerStack.h"
 #include "Dummy/Layers System/Layer/Layer.h"
-#include "Dummy/Renderer/Buffers/IndexBuffer/IndexBuffer.h"
-#include "Dummy/Renderer/Buffers/VertexBuffer/VertexBuffer.h"
-#include "Dummy/Renderer/Camera/Camera.h"
-#include "Dummy/Renderer/Shader/Shader.h"
-#include "Dummy/Renderer/VertexArray/VertexArray.h"
 
 namespace Dummy
 {
@@ -42,11 +37,6 @@ namespace Dummy
         bool bRunning = true;
 
         LayerStack Layer_Stack;
-
-        std::shared_ptr<VertexArray> VertexArray_;
-        std::shared_ptr<Shader> shader_;
-
-        Camera Camera_;
 
         //===========================
         static Application* Instance;
