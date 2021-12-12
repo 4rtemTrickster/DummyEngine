@@ -120,6 +120,11 @@ public:
 
     void OnUpdate() override
     {
+        if(Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += CameraSpeed * Camera_.GetForwardVector();
+        if(Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= CameraSpeed * Camera_.GetForwardVector();
+        if(Dummy::Input::IsKeyPressed(DE_KEY_D)) CameraPosition += glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+        if(Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -= glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+        
         Dummy::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
         Dummy::RenderCommand::Clear();
 
@@ -150,10 +155,6 @@ public:
     {
         switch (event.GetKeyCode())
         {
-        case DE_KEY_W: CameraPosition += CameraSpeed * Camera_.GetForwardVector(); return false;
-        case DE_KEY_S: CameraPosition -= CameraSpeed * Camera_.GetForwardVector(); return false;
-        case DE_KEY_D: CameraPosition += glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed; return false;
-        case DE_KEY_A: CameraPosition -= glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed; return false;
         }
  
         return true;
@@ -207,7 +208,7 @@ protected:
     glm::vec3 CameraPosition = glm::vec3(0.0f,0.0f,3.0f);
     float CameraYaw;
     float CameraPitch;
-    float CameraSpeed = 0.1f;
+    float CameraSpeed = 0.05f;
 };
 
 
