@@ -12,8 +12,8 @@ namespace Dummy
                const glm::vec3& up = glm::vec3(0.0f, 1.0f, 0.0f)
                );
 
-        void SetPosition(const glm::vec3& position) { UpdateCameraVectors(); Position = position; }
-        void SetRotation(float pitch, float yaw) { UpdateCameraVectors(); Pitch = pitch; Yaw = yaw; }
+        void SetPosition(const glm::vec3& position) { Position = position; UpdateCameraVectors(); }
+        void SetRotation(float pitch, float yaw) { Pitch = pitch; Yaw = yaw; UpdateCameraVectors(); }
 
         const glm::vec3& GetPosition() const { return Position; }
         float GetRotationPitch() const { return Pitch; }
