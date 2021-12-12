@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Dummy/Application/Application.h"
 #include "Dummy/Input/Input.h"
 #include "Dummy/Key & MouseCodes/KeyCodes.h"
