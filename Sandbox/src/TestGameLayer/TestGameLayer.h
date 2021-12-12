@@ -10,6 +10,10 @@ public:
 
     void OnUpdate(Dummy::Timestep ts) override;
 
+    void OnEvent(Dummy::Event& event) override;
+
+    bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event);
+
 protected:
     std::shared_ptr<Dummy::VertexArray> VertexArray_;
     std::shared_ptr<Dummy::Shader> shader_;
