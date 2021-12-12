@@ -20,6 +20,8 @@
 
 #include "Dummy/Renderer/Camera/Camera.h"
 
+#include "Dummy/Timestep/Timestep.h"
+
 #include "Dummy/Renderer/Shader/Shader.h"
 
 #include "Dummy/Layers System/Layer/Layer.h"

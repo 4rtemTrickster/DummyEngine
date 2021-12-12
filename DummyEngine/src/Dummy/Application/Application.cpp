@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "imgui.h"
 #include "Dummy/Input/Input.h"
+#include "GLFW/glfw3.h"
 
 
 namespace Dummy
@@ -29,8 +30,12 @@ namespace Dummy
     {
         while(bRunning)
         {
+            float time = static_cast<float>(glfwGetTime()); //TODO: Platform::GetTime();
+            Timestep timestep = time - LastFrameTime;
+            LastFrameTime = time;
+            
             for(Layer* layer : Layer_Stack)
-                layer->OnUpdate();
+                layer->OnUpdate(timestep);
 
             imGuiLayer->Begin();
             for(Layer* layer : Layer_Stack)

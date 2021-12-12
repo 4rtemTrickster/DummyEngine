@@ -7,6 +7,7 @@
 #include "Dummy/ImGui/Layer/ImGuiLayer.h"
 #include "Dummy/Layers System/Layer Stack/LayerStack.h"
 #include "Dummy/Layers System/Layer/Layer.h"
+#include "Dummy/Timestep/Timestep.h"
 
 namespace Dummy
 {
@@ -37,6 +38,7 @@ namespace Dummy
         bool bRunning = true;
 
         LayerStack Layer_Stack;
+        float LastFrameTime = 0.0f;
 
         //===========================
         static Application* Instance;

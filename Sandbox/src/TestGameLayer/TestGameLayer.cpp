@@ -1,7 +1,7 @@
 ﻿#include "TestGameLayer.h"
 
 TestGameLayer::TestGameLayer()
-    :   Layer("Example layer"), Camera_(CameraPosition)
+    :   Layer("TestGameLayer"), Camera_(CameraPosition)
 {
     CameraPitch = Camera_.GetRotationPitch();
         CameraYaw = Camera_.GetRotationYaw();
@@ -114,7 +114,7 @@ TestGameLayer::TestGameLayer()
         shader_ = std::make_unique<Dummy::Shader>(vertexSrc, fragmentSrc);
 }
 
-void TestGameLayer::MoveCamera()
+void TestGameLayer::MoveCamera(Dummy::Timestep ts)
 {
     static std::pair<float, float> LastPos;
     std::pair<float, float> CurrentPos = Dummy::Input::GetMousePos();
@@ -126,8 +126,8 @@ void TestGameLayer::MoveCamera()
     }
         
     // Offset * sensitivity
-    CameraYaw   += (CurrentPos.first - LastPos.first)   * CameraSensitivity;
-    CameraPitch += (LastPos.second - CurrentPos.second) * CameraSensitivity;
+    CameraYaw   += (CurrentPos.first - LastPos.first)   * CameraSensitivity * ts; 
+    CameraPitch += (LastPos.second - CurrentPos.second) * CameraSensitivity * ts;
 
     LastPos.first = CurrentPos.first;
     LastPos.second = CurrentPos.second;
@@ -143,17 +143,17 @@ void TestGameLayer::MoveCamera()
     Camera_.UpdateCameraVectors();
 }
 
-void TestGameLayer::OnUpdate()
+void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 {
-    if (Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += CameraSpeed * Camera_.GetForwardVector();
-    else if (Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= CameraSpeed * Camera_.GetForwardVector();
+    if (Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += (CameraSpeed * ts) * Camera_.GetForwardVector();
+    else if (Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= (CameraSpeed * ts) * Camera_.GetForwardVector();
 
     if (Dummy::Input::IsKeyPressed(DE_KEY_D)) CameraPosition +=
-        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * (CameraSpeed * ts);
     else if (Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -=
-        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * CameraSpeed;
+        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * (CameraSpeed * ts);
 
-    if(Dummy::Input::IsMouseMoved()) MoveCamera();
+    if(Dummy::Input::IsMouseMoved()) MoveCamera(ts);
 
     Dummy::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
     Dummy::RenderCommand::Clear();

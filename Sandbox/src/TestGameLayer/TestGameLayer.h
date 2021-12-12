@@ -6,9 +6,9 @@ class TestGameLayer : public Dummy::Layer
 public:
     TestGameLayer();
 
-    void MoveCamera();
+    void MoveCamera(Dummy::Timestep ts);
 
-    void OnUpdate() override;
+    void OnUpdate(Dummy::Timestep ts) override;
 
 protected:
     std::shared_ptr<Dummy::VertexArray> VertexArray_;
@@ -18,6 +18,6 @@ protected:
     glm::vec3 CameraPosition = glm::vec3(0.0f, 0.0f, 3.0f);
     float CameraYaw;
     float CameraPitch;
-    float CameraSpeed = 0.05f;
-    float CameraSensitivity = 0.2f;
+    float CameraSpeed = 3.f;
+    float CameraSensitivity = 10.f;
 };
