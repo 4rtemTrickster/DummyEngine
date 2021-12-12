@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <glm/glm.hpp>
 
 namespace Dummy
 {
@@ -10,6 +11,8 @@ namespace Dummy
 
         void Bind() const;
         void Unbind() const;
+
+        void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 
     protected:
         uint32_t RendererID;

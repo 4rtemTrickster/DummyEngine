@@ -15,6 +15,7 @@ namespace Dummy
     Application* Application::Instance = nullptr;
     
     Application::Application()
+        :   Camera_({0.0f, 0.0f, -5.0f})
     {
         DE_CORE_ASSERT(!Instance, "Application already exists!");
         Instance = this;
@@ -27,10 +28,11 @@ namespace Dummy
         
         VertexArray_.reset(VertexArray::Create());
 
-        float vertices[3 * 7] = {
-            -0.5f, -0.5f, 0.0f, 0.8f, 0.0f, 0.0f, 1.0f,
-             0.5f, -0.5f, 0.0f, 0.0f, 0.8f, 0.0f, 1.0f,
-             0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 0.8f, 1.0f
+        float vertices[4 * 7] = {
+            -0.5f, -0.5f, 0.0f,     0.8f, 0.0f, 0.0f, 1.0f,
+             0.5f, -0.5f, 0.0f,     0.0f, 0.8f, 0.0f, 1.0f,
+             0.5f,  0.5f, 0.0f,     0.8f, 0.0f, 0.0f, 1.0f,
+            -0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 0.8f, 1.0f
         };
 
         std::shared_ptr<VertexBuffer> VB;
@@ -45,9 +47,9 @@ namespace Dummy
         VertexArray_->AddVertexBuffer(VB);
         
 
-        unsigned int indices[3] = {0, 1, 2};
+        std::vector<uint32_t> indices = {0, 1, 2, 0, 2, 3};
         std::shared_ptr<IndexBuffer> IB;
-        IB.reset(IndexBuffer::Create(indices, 3));
+        IB.reset(IndexBuffer::Create(indices.data(), indices.size()));
 
         VertexArray_->SetIndexBuffer(IB);
 
@@ -57,12 +59,14 @@ namespace Dummy
             layout(location = 0) in vec3 a_Position;
             layout(location = 1) in vec4 a_Color;
 
+            uniform mat4 u_ViewProjection;
+
             out vec4 v_Color;
     
             void main()
             {
                 v_Color = a_Color;
-                gl_Position = vec4(a_Position, 1.0);
+                gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
             }
         )";
 
@@ -92,9 +96,13 @@ namespace Dummy
             RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
             RenderCommand::Clear();
 
-            shader_->Bind();
             Renderer::BeginScene();
+
+            shader_->Bind();
+            shader_->UploadUniformMat4("u_ViewProjection", Camera_.GetViewProjectionMatrix());
+
             Renderer::Submit( VertexArray_);
+            
             Renderer::EndScene();
           
             for(Layer* layer : Layer_Stack)
