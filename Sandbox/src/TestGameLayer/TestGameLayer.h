@@ -24,4 +24,6 @@ protected:
     float CameraPitch;
     float CameraSpeed = 3.f;
     float CameraSensitivity = 10.f;
+
+    glm::vec3 CubePos;
 };
