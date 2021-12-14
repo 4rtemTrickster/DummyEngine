@@ -24,5 +24,8 @@ namespace Dummy
     protected:
         uint32_t RendererID;
 
+        ///////////////////////////////
+        bool CheckShadersCompilationStatus(std::vector<std::pair<unsigned int, std::string>> shaders);
+
     };
 }

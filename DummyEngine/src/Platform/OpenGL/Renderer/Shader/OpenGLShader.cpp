@@ -1,9 +1,8 @@
 ﻿#include "DEpch.h"
 #include "OpenGLShader.h"
 
-#include "glad/glad.h"
-
 #include "Dummy/Log/Log.h"
+#include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
 
 
@@ -11,57 +10,28 @@ namespace Dummy
 {
     OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
     {
-        GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+        std::vector<std::pair<GLuint, std::string>> Shaders;
+
+        Shaders.push_back({glCreateShader(GL_VERTEX_SHADER), "Vertex"});
+        Shaders.push_back({glCreateShader(GL_FRAGMENT_SHADER), "Fragment"});
+
 
         const GLchar* source = vertexSrc.c_str();
-        glShaderSource(vertexShader, 1, &source, nullptr);
-
-        glCompileShader(vertexShader);
-
-        GLint isCompiled = 0;
-        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-        if (isCompiled == GL_FALSE)
-        {
-            GLint maxLength = 0;
-            glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-            std::vector<GLchar> infolog(maxLength);
-            glGetShaderInfoLog(vertexShader, maxLength, &maxLength, infolog.data());
-
-            glDeleteShader(vertexShader);
-
-            DE_CORE_ERROR("{0}", infolog.data());
-            DE_CORE_ASSERT(false,"Vertex shader compilation failure!");
-            return;
-        }
-
-        GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+        
+        glShaderSource(Shaders[0].first, 1, &source, nullptr);
+        glCompileShader(Shaders[0].first);
 
         source = fragmentSrc.c_str();
-        glShaderSource(fragmentShader, 1, &source, nullptr);
+        glShaderSource(Shaders[1].first, 1, &source, nullptr);
 
-        glCompileShader(fragmentShader);
-        
-        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-        if (isCompiled == GL_FALSE)
-        {
-            GLint maxLength = 0;
-            glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+        glCompileShader(Shaders[1].first);
 
-            std::vector<GLchar> infolog(maxLength);
-            glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, infolog.data());
+        if(!CheckShadersCompilationStatus(Shaders)) return;
 
-            glDeleteShader(fragmentShader);
-            glDeleteShader(vertexShader);
-
-            DE_CORE_ERROR("{0}", infolog.data());
-            DE_CORE_ASSERT(false,"Fragment shader compilation failure!");
-            return;
-        }
 
         RendererID = glCreateProgram();
-        glAttachShader(RendererID, vertexShader);
-        glAttachShader(RendererID, fragmentShader);
+        glAttachShader(RendererID, Shaders[0].first);
+        glAttachShader(RendererID, Shaders[1].first);
 
         glLinkProgram(RendererID);
         
@@ -78,16 +48,16 @@ namespace Dummy
 
             glDeleteProgram(RendererID);
 
-            glDeleteShader(fragmentShader);
-            glDeleteShader(vertexShader);
+            glDeleteShader(Shaders[0].first);
+            glDeleteShader(Shaders[1].first);
             
             DE_CORE_ERROR("{0}", infolog.data());
             DE_CORE_ASSERT(false,"Shader program link failure!");
             return;
         }
 
-        glDetachShader(RendererID, vertexShader);
-        glDetachShader(RendererID, fragmentShader);
+        glDetachShader(RendererID, Shaders[0].first);
+        glDetachShader(RendererID, Shaders[1].first);
     }
 
     OpenGLShader::~OpenGLShader()
@@ -121,5 +91,33 @@ namespace Dummy
     {
         GLint location = glGetUniformLocation(RendererID, name.c_str());
         glUniform3f(location, value.x, value.y, value.z);
+    }
+
+    bool OpenGLShader::CheckShadersCompilationStatus(std::vector<std::pair<unsigned int, std::string>> shaders)
+    {
+        GLint isCompiled = 0;
+
+        for (auto&[shaderID, shaderType] : shaders)
+        {
+            glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isCompiled);
+            
+            if (isCompiled == GL_FALSE)
+            {
+                GLint maxLength = 0;
+                glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
+
+                std::vector<GLchar> infolog(maxLength);
+                glGetShaderInfoLog(shaderID, maxLength, &maxLength, infolog.data());
+
+                for(auto& var : shaders)
+                    glDeleteShader(var.first);
+
+                DE_CORE_ERROR("{0}", infolog.data());
+                DE_CORE_ASSERT(false,(shaderType + " shader compilation failure!"));
+                return false;
+            }
+        }
+
+        return true;
     }
 }
