@@ -14,8 +14,8 @@ namespace Dummy
 
         const std::filesystem::path workdir = std::filesystem::current_path();
 
-        std::filesystem::path vertexPath = workdir / ("res/Shaders/" + name + "/" + name + ".vert");
-        std::filesystem::path fragmentPath = workdir / ("res/Shaders/" + name + "/" + name + ".frag");
+        std::filesystem::path vertexPath = workdir / ("res\\Shaders\\" + name + "\\" + name + ".vert");
+        std::filesystem::path fragmentPath = workdir / ("res\\Shaders\\" + name + "\\" + name + ".frag");
         
         if(std::filesystem::exists(vertexPath))
         {
