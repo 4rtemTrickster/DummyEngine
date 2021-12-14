@@ -1,8 +1,6 @@
 ﻿#include "DEpch.h"
 #include "OpenGLShader.h"
 
-#include <filesystem>
-
 #include "Dummy/Log/Log.h"
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -14,8 +12,10 @@ namespace Dummy
     {
         std::vector<std::pair<GLuint, std::string>> Shaders;
 
-        std::filesystem::path vertexPath = "res/Shaders/" + name + "/" + name + ".vert";
-        std::filesystem::path fragmentPath = "res/Shaders/" + name + "/" + name + ".frag";
+        const std::filesystem::path workdir = std::filesystem::current_path();
+
+        std::filesystem::path vertexPath = workdir / ("res/Shaders/" + name + "/" + name + ".vert");
+        std::filesystem::path fragmentPath = workdir / ("res/Shaders/" + name + "/" + name + ".frag");
         
         if(std::filesystem::exists(vertexPath))
         {
@@ -23,7 +23,7 @@ namespace Dummy
 
             //TODO: read shader from file
             
-            const GLchar* source = vertexSrc.c_str();
+            const GLchar* source = ParseShader(vertexPath).c_str();
 
             glShaderSource(Shaders[0].first, 1, &source, nullptr);
             glCompileShader(Shaders[0].first);
@@ -40,7 +40,7 @@ namespace Dummy
 
             //TODO: read shader from file
             
-            const GLchar* source = fragmentSrc.c_str();
+            const GLchar* source = ParseShader(fragmentPath).c_str();
 
             glShaderSource(Shaders[1].first, 1, &source, nullptr);
             glCompileShader(Shaders[1].first);
@@ -144,5 +144,18 @@ namespace Dummy
         }
 
         return true;
+    }
+
+    std::string OpenGLShader::ParseShader(const std::filesystem::path& path)
+    {
+        std::ifstream fs(path);
+        std::string line;
+
+        if (!fs.is_open())
+            DE_CORE_ERROR("Can not open shader file! Path: {0}", path);
+
+        std::stringstream ss;
+        ss << fs.rdbuf();
+        return ss.str();
     }
 }

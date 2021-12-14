@@ -89,7 +89,7 @@ TestGameLayer::TestGameLayer()
 
         VertexArray_->SetIndexBuffer(IB);
 
-        shader_.reset(Dummy::Shader::Create(vertexSrc,fragmentSrc));
+        shader_.reset(Dummy::Shader::Create("Cube"));
 }
 
 void TestGameLayer::MoveCamera(Dummy::Timestep ts)

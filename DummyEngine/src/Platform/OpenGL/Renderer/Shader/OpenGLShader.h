@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <filesystem>
+
 #include "glm/glm.hpp"
 
 #include "Dummy/Renderer/Shader/Shader.h"
@@ -26,6 +28,8 @@ namespace Dummy
 
         ///////////////////////////////
         bool CheckShadersCompilationStatus(std::vector<std::pair<unsigned int, std::string>> shaders);
+        
+        static std::string ParseShader(const std::filesystem::path& path);
 
     };
 }
