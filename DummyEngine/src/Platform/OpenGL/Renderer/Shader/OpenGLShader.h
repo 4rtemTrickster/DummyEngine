@@ -9,7 +9,7 @@ namespace Dummy
     class OpenGLShader : public Shader
     {
     public:
-        OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+        OpenGLShader(const std::string& name);
         ~OpenGLShader() override;
         
         void Bind() const override;

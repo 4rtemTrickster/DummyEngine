@@ -1,6 +1,8 @@
 ﻿#include "DEpch.h"
 #include "OpenGLShader.h"
 
+#include <filesystem>
+
 #include "Dummy/Log/Log.h"
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -8,23 +10,46 @@
 
 namespace Dummy
 {
-    OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+    OpenGLShader::OpenGLShader(const std::string& name)
     {
         std::vector<std::pair<GLuint, std::string>> Shaders;
 
-        Shaders.push_back({glCreateShader(GL_VERTEX_SHADER), "Vertex"});
-        Shaders.push_back({glCreateShader(GL_FRAGMENT_SHADER), "Fragment"});
-
-
-        const GLchar* source = vertexSrc.c_str();
+        std::filesystem::path vertexPath = "res/Shaders/" + name + "/" + name + ".vert";
+        std::filesystem::path fragmentPath = "res/Shaders/" + name + "/" + name + ".frag";
         
-        glShaderSource(Shaders[0].first, 1, &source, nullptr);
-        glCompileShader(Shaders[0].first);
+        if(std::filesystem::exists(vertexPath))
+        {
+            Shaders.push_back({glCreateShader(GL_VERTEX_SHADER), "Vertex"});
 
-        source = fragmentSrc.c_str();
-        glShaderSource(Shaders[1].first, 1, &source, nullptr);
+            //TODO: read shader from file
+            
+            const GLchar* source = vertexSrc.c_str();
 
-        glCompileShader(Shaders[1].first);
+            glShaderSource(Shaders[0].first, 1, &source, nullptr);
+            glCompileShader(Shaders[0].first);
+        }
+        else
+        {
+            DE_CORE_ERROR("Shader with name: {0} does not exists!", name);
+            return;
+        }
+
+        if(std::filesystem::exists(fragmentPath))
+        {
+            Shaders.push_back({glCreateShader(GL_FRAGMENT_SHADER), "Fragment"});
+
+            //TODO: read shader from file
+            
+            const GLchar* source = fragmentSrc.c_str();
+
+            glShaderSource(Shaders[1].first, 1, &source, nullptr);
+            glCompileShader(Shaders[1].first);
+        }
+        else
+        {
+            DE_CORE_ERROR("Shader with name: {0} does not exists!", name);
+            return;
+        }
 
         if(!CheckShadersCompilationStatus(Shaders)) return;
 
