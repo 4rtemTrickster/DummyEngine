@@ -1,6 +1,7 @@
 ﻿#include "DEpch.h"
 #include "Renderer.h"
 
+#include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 #include "RenderCommand/RenderCommand.h"
 
 namespace Dummy
@@ -19,8 +20,8 @@ namespace Dummy
     void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
     {
         shader->Bind();
-        shader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-        shader->UploadUniformMat4("u_Transform", transform);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
         
         vertexArray->Bind();
         RenderCommand::DrawIndexed(vertexArray);

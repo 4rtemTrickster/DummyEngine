@@ -1,6 +1,10 @@
 ﻿#include "TestGameLayer.h"
 
 #include <glm/ext/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.inl>
+
+#include "imgui/imgui.h"
+#include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 
 TestGameLayer::TestGameLayer()
     :   Layer("TestGameLayer"), Camera_(CameraPosition)
@@ -103,15 +107,15 @@ TestGameLayer::TestGameLayer()
             #version 330 core
     
             layout(location = 0) out vec4 color;
-            uniform vec4 u_Color;
+            uniform vec3 u_Color;
     
             void main()
             {
-                color = u_Color;
+                color = vec4(u_Color, 1.0);
             }
         )";
 
-        shader_ = std::make_unique<Dummy::Shader>(vertexSrc, fragmentSrc);
+        shader_.reset(Dummy::Shader::Create(vertexSrc,fragmentSrc));
 }
 
 void TestGameLayer::MoveCamera(Dummy::Timestep ts)
@@ -165,8 +169,8 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 
     static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.f));
 
-    static const glm::vec4 fcolor(0.2f, 0.8f, 0.8f, 1.0f);
-    static const glm::vec4 scolor(0.2f, 0.8f, 0.2f, 1.0f);
+    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->Bind();
+    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->UploadUniformFloat3("u_Color", CubeColor);
 
     for (int x = 0; x < 5; ++x)
     {
@@ -174,11 +178,6 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
         {
             for(int z = 0; z > -5; --z)
             {
-                if( x % 2 == 0)
-                    shader_->UploadUniformFloat4("u_Color", fcolor);
-                else
-                    shader_->UploadUniformFloat4("u_Color", scolor);
-                
                 Dummy::Renderer::Submit(shader_, VertexArray_,
                     glm::rotate((glm::translate(glm::mat4(1.0f), glm::vec3(x * 2.5f, y * 2.5f, z * 2.5f)) * scale ),
                         45.0f * x + z,
@@ -189,6 +188,13 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
                 
 
     Dummy::Renderer::EndScene();
+}
+
+void TestGameLayer::OnImGuiRender()
+{
+    ImGui::Begin("Settings");
+    ImGui::ColorEdit3("Cube color", glm::value_ptr(CubeColor));
+    ImGui::End();
 }
 
 void TestGameLayer::OnEvent(Dummy::Event& event)

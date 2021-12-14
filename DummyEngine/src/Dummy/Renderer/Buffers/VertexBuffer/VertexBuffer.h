@@ -6,7 +6,7 @@ namespace Dummy
     class VertexBuffer
     {
     public:
-        virtual ~VertexBuffer() {}
+        virtual ~VertexBuffer() = default;
 
         virtual void Bind() const  = 0;
         virtual void Unbind() const = 0;

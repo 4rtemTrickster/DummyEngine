@@ -10,6 +10,8 @@ public:
 
     void OnUpdate(Dummy::Timestep ts) override;
 
+    void OnImGuiRender() override;
+
     void OnEvent(Dummy::Event& event) override;
 
     bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event);
@@ -26,4 +28,5 @@ protected:
     float CameraSensitivity = 10.f;
 
     glm::vec3 CubePos;
+    glm::vec3 CubeColor = glm::vec3(1.0f, 1.0f, 1.0f);
 };

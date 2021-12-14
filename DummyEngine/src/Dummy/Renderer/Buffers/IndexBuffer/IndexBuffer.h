@@ -5,7 +5,7 @@ namespace Dummy
     class IndexBuffer
     {
     public:
-        virtual ~IndexBuffer() {}
+        virtual ~IndexBuffer() = default;
 
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
