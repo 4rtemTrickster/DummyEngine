@@ -10,8 +10,9 @@ namespace Dummy
 {
     OpenGLShader::OpenGLShader(const std::string& name)
     {
+        static const std::filesystem::path ShadersFolder("res\\Shaders");
         std::vector<std::pair<GLuint, std::string>> Shaders;
-        const std::filesystem::path ShadersFolder("res/Shaders");
+        
 
         if (std::filesystem::exists(ShadersFolder / name))
         {
@@ -111,22 +112,34 @@ namespace Dummy
         glUseProgram(0);
     }
 
+    unsigned OpenGLShader::GetUniformLocation(const std::string& name)
+    {
+        if (UniformLocationCache.find(name) != UniformLocationCache.end())
+            return UniformLocationCache[name];
+
+        GLint location = glGetUniformLocation(RendererID, name.c_str());
+
+        if (location == -1)
+            DE_CORE_WARN("Uniform: {0} doesn't exist!", name);
+
+        UniformLocationCache[name] = location;
+
+        return location;
+    }
+
     void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
     {
-        GLint location = glGetUniformLocation(RendererID, name.c_str());
-        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+        glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
     }
 
     void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value)
     {
-        GLint location = glGetUniformLocation(RendererID, name.c_str());
-        glUniform4f(location, value.x, value.y, value.z, value.w);
+        glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w);
     }
 
     void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value)
     {
-        GLint location = glGetUniformLocation(RendererID, name.c_str());
-        glUniform3f(location, value.x, value.y, value.z);
+        glUniform3f(GetUniformLocation(name), value.x, value.y, value.z);
     }
 
     bool OpenGLShader::CheckShadersCompilationStatus(std::vector<std::pair<unsigned int, std::string>> shaders)

@@ -25,9 +25,13 @@ namespace Dummy
 
     protected:
         uint32_t RendererID;
+        
+        // Caching for uniforms
+        std::unordered_map <std::string, unsigned int> UniformLocationCache;
 
         ///////////////////////////////
         bool CheckShadersCompilationStatus(std::vector<std::pair<unsigned int, std::string>> shaders);
+        unsigned int GetUniformLocation(const std::string& name);
         
         static std::string ParseShader(const std::filesystem::path& path);
 
