@@ -127,6 +127,11 @@ namespace Dummy
         return location;
     }
 
+    void OpenGLShader::UploadUniformInt(const std::string& name, const int value)
+    {
+        glUniform1i(GetUniformLocation(name), value);
+    }
+
     void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
     {
         glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));

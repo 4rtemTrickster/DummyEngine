@@ -19,6 +19,7 @@ public:
 protected:
     Dummy::Ref<Dummy::VertexArray> VertexArray_;
     Dummy::Ref<Dummy::Shader> shader_;
+    Dummy::Ref<Dummy::Texture2D> texture;
 
     Dummy::Camera Camera_;
     glm::vec3 CameraPosition = glm::vec3(0.0f, 0.0f, 3.0f);

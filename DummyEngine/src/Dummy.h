@@ -23,6 +23,8 @@
 #include "Dummy/Timestep/Timestep.h"
 
 #include "Dummy/Renderer/Shader/Shader.h"
+#include "Dummy/Renderer/Textures/Texture.h"
+#include "Dummy/Renderer/Textures/Texture2D/Texture2D.h"
 
 #include "Dummy/Layers System/Layer/Layer.h"
 

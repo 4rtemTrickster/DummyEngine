@@ -17,6 +17,8 @@ namespace Dummy
         void Bind() const override;
         void Unbind() const override;
 
+        void UploadUniformInt(const std::string& name, const int value);
+
         void UploadUniformFloat4(const std::string& name, const glm::vec4& value);
         void UploadUniformFloat3(const std::string& name, const glm::vec3& value);
         

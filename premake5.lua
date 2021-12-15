@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "DummyEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "DummyEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "DummyEngine/vendor/imgui"
 IncludeDir["glm"] = "DummyEngine/vendor/glm"
+IncludeDir["stb_image"] = "DummyEngine/vendor/stb_image"
 
 include "DummyEngine/vendor/GLFW"
 include "DummyEngine/vendor/Glad"
@@ -38,7 +39,11 @@ project "DummyEngine"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.h",
+        "%{prj.name}/vendor/stb_image/**.cpp",
+        "%{prj.name}/vendor/glm/glm/**.hpp",
+        "%{prj.name}/vendor/glm/glm/**.inl",
     }
 
     defines
@@ -53,7 +58,8 @@ project "DummyEngine"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}"
     }
 
     links
@@ -104,7 +110,9 @@ project "Sandbox"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/res/Shaders/**.vert",
+        "%{prj.name}/res/Shaders/**.frag",
     }
 
     includedirs
