@@ -11,43 +11,53 @@ namespace Dummy
     OpenGLShader::OpenGLShader(const std::string& name)
     {
         std::vector<std::pair<GLuint, std::string>> Shaders;
+        const std::filesystem::path ShadersFolder("res/Shaders");
 
-        const std::filesystem::path workdir = std::filesystem::current_path();
-
-        std::filesystem::path vertexPath = workdir / ("res\\Shaders\\" + name + "\\" + name + ".vert");
-        std::filesystem::path fragmentPath = workdir / ("res\\Shaders\\" + name + "\\" + name + ".frag");
-        
-        if(std::filesystem::exists(vertexPath))
+        if (std::filesystem::exists(ShadersFolder / name))
         {
-            Shaders.push_back({glCreateShader(GL_VERTEX_SHADER), "Vertex"});
-
-            //TODO: read shader from file
+            bool hasVertexShader = false;
+            bool hasFragmentShader = false;
             
-            const GLchar* source = ParseShader(vertexPath).c_str();
+            for (auto const& dir_entry : std::filesystem::directory_iterator{ShadersFolder / name })
+            {
+                unsigned int shaderID;
+                std::string shaderType;
 
-            glShaderSource(Shaders[0].first, 1, &source, nullptr);
-            glCompileShader(Shaders[0].first);
+                auto extension = dir_entry.path().filename().extension();
+                
+                if (extension == ".vert")
+                {
+                    shaderID = glCreateShader(GL_VERTEX_SHADER);
+                    shaderType = "Fragment";
+                    hasVertexShader = true;
+                }
+                else if(extension == ".frag")
+                {
+                    shaderID = glCreateShader(GL_FRAGMENT_SHADER);
+                    shaderType = "Fragment";
+                    hasFragmentShader = true;
+                }
+                
+
+                std::string Source = ParseShader(dir_entry.path()).c_str();
+            
+                const GLchar* source = Source.c_str();
+
+                glShaderSource(shaderID, 1, &source, nullptr);
+                glCompileShader(shaderID);
+
+                Shaders.push_back({shaderID, shaderType});
+            }
+
+            if(!(hasVertexShader && hasFragmentShader))
+            {
+                DE_CORE_ERROR("Shaders file are missing");
+                return;
+            }
         }
         else
         {
-            DE_CORE_ERROR("Shader with name: {0} does not exists!", name);
-            return;
-        }
-
-        if(std::filesystem::exists(fragmentPath))
-        {
-            Shaders.push_back({glCreateShader(GL_FRAGMENT_SHADER), "Fragment"});
-
-            //TODO: read shader from file
-            
-            const GLchar* source = ParseShader(fragmentPath).c_str();
-
-            glShaderSource(Shaders[1].first, 1, &source, nullptr);
-            glCompileShader(Shaders[1].first);
-        }
-        else
-        {
-            DE_CORE_ERROR("Shader with name: {0} does not exists!", name);
+            DE_CORE_ERROR("Shader folder with name: {0} does not exists!", name);
             return;
         }
 
@@ -55,8 +65,9 @@ namespace Dummy
 
 
         RendererID = glCreateProgram();
-        glAttachShader(RendererID, Shaders[0].first);
-        glAttachShader(RendererID, Shaders[1].first);
+
+        for(auto& shader : Shaders)
+            glAttachShader(RendererID, shader.first);
 
         glLinkProgram(RendererID);
         
@@ -153,6 +164,8 @@ namespace Dummy
 
         if (!fs.is_open())
             DE_CORE_ERROR("Can not open shader file! Path: {0}", path);
+
+        DE_CORE_INFO("Shader file is open!\nPath: {0}", path);
 
         std::stringstream ss;
         ss << fs.rdbuf();
