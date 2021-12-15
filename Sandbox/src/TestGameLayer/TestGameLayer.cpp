@@ -141,34 +141,9 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 
     Dummy::Renderer::BeginScene(Camera_);
 
-    static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.f));
-
-    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->Bind();
-    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->UploadUniformFloat3("u_Color", CubeColor);
-
-    for (int x = 0; x < 5; ++x)
-    {
-        for(int y = 0; y < 5; ++y)
-        {
-            for(int z = 0; z > -5; --z)
-            {
-                Dummy::Renderer::Submit(shader_, VertexArray_,
-                    glm::rotate((glm::translate(glm::mat4(1.0f), glm::vec3(x * 2.5f, y * 2.5f, z * 2.5f)) * scale ),
-                        45.0f * x + z,
-                        glm::vec3(1.0f)));
-            }
-        }
-    }
-                
+    Dummy::Renderer::Submit(shader_, VertexArray_);
 
     Dummy::Renderer::EndScene();
-}
-
-void TestGameLayer::OnImGuiRender()
-{
-    ImGui::Begin("Settings");
-    ImGui::ColorEdit3("Cube color", glm::value_ptr(CubeColor));
-    ImGui::End();
 }
 
 void TestGameLayer::OnEvent(Dummy::Event& event)
@@ -180,6 +155,10 @@ void TestGameLayer::OnEvent(Dummy::Event& event)
 
 bool TestGameLayer::OnKeyPressedEvent(Dummy::KeyPressedEvent& event)
 {
-    // TODO: Window close on escape button
+    if(event.GetKeyCode() == DE_KEY_ESCAPE)
+    {
+        Dummy::Application::Get().OnEvent(Dummy::WindowCloseEvent());
+        return false;
+    }
     return true;
 }

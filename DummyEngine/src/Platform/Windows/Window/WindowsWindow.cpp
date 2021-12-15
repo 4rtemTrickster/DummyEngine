@@ -60,7 +60,7 @@ namespace Dummy
         glfwSetWindowUserPointer(Window, &Data);
         SetVSync(true);
         
-        //glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);  
+        glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);  
 
         // Set GLFW callback's
         glfwSetWindowSizeCallback(Window, [](GLFWwindow* window, int width, int height)
