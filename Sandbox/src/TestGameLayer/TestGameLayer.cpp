@@ -10,11 +10,11 @@ TestGameLayer::TestGameLayer()
     :   Layer("TestGameLayer"), Camera_(CameraPosition)
 {
     CameraPitch = Camera_.GetRotationPitch();
-        CameraYaw = Camera_.GetRotationYaw();
+    CameraYaw = Camera_.GetRotationYaw();
 
-        VertexArray_.reset(Dummy::VertexArray::Create());
+    VertexArray_.reset(Dummy::VertexArray::Create());
 
-        float vertices[24 * 7] = {
+    float vertices[24 * 7] = {
              0.5f, -0.5f, -0.5f,     // 0
             -0.5f, -0.5f, -0.5f,     // 1
             -0.5f,  0.5f, -0.5f,     // 2
@@ -48,48 +48,48 @@ TestGameLayer::TestGameLayer()
              0.5f,  0.5f,  0.5f,     // 21
              0.5f,  0.5f, -0.5f,     // 22
             -0.5f,  0.5f, -0.5f,     // 23
-        };
+    };
 
-        std::shared_ptr<Dummy::VertexBuffer> VB;
-        VB.reset(Dummy::VertexBuffer::Create(vertices, sizeof(vertices)));
+    Dummy::Ref<Dummy::VertexBuffer> VB;
+    VB.reset(Dummy::VertexBuffer::Create(vertices, sizeof(vertices)));
 
-        VB->SetLayout(
-            {
-                {Dummy::ShaderDataType::FLOAT3, "a_Position"}
-            });
-
-        //{Dummy::ShaderDataType::FLOAT4, "a_Color"}
-
-        VertexArray_->AddVertexBuffer(VB);
-
-
-        std::vector<uint32_t> indices =
+    VB->SetLayout(
         {
-            0, 1, 2,
-            2, 3, 0,
+            {Dummy::ShaderDataType::FLOAT3, "a_Position"}
+        });
 
-            4, 5, 6,
-            6, 7, 4,
+    //{Dummy::ShaderDataType::FLOAT4, "a_Color"}
 
-            8, 9, 10,
-            10, 11, 8,
+    VertexArray_->AddVertexBuffer(VB);
 
-            12, 13, 14,
-            14, 15, 12,
 
-            16, 17, 18,
-            18, 19, 16,
+    std::vector<uint32_t> indices =
+    {
+        0, 1, 2,
+        2, 3, 0,
 
-            20, 21, 22,
-            22, 23, 20
-        };
+        4, 5, 6,
+        6, 7, 4,
 
-        std::shared_ptr<Dummy::IndexBuffer> IB;
-        IB.reset(Dummy::IndexBuffer::Create(indices.data(), indices.size()));
+        8, 9, 10,
+        10, 11, 8,
 
-        VertexArray_->SetIndexBuffer(IB);
+        12, 13, 14,
+        14, 15, 12,
 
-        shader_.reset(Dummy::Shader::Create("Cube"));
+        16, 17, 18,
+        18, 19, 16,
+
+        20, 21, 22,
+        22, 23, 20
+    };
+
+    Dummy::Ref<Dummy::IndexBuffer> IB;
+    IB.reset(Dummy::IndexBuffer::Create(indices.data(), indices.size()));
+
+    VertexArray_->SetIndexBuffer(IB);
+
+    shader_.reset(Dummy::Shader::Create("Cube"));
 }
 
 void TestGameLayer::MoveCamera(Dummy::Timestep ts)

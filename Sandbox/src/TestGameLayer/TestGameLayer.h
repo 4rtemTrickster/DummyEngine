@@ -17,8 +17,8 @@ public:
     bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event);
 
 protected:
-    std::shared_ptr<Dummy::VertexArray> VertexArray_;
-    std::shared_ptr<Dummy::Shader> shader_;
+    Dummy::Ref<Dummy::VertexArray> VertexArray_;
+    Dummy::Ref<Dummy::Shader> shader_;
 
     Dummy::Camera Camera_;
     glm::vec3 CameraPosition = glm::vec3(0.0f, 0.0f, 3.0f);
