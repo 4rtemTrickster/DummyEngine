@@ -33,7 +33,7 @@ namespace Dummy
 
         bool OnWindowClose(WindowCloseEvent& e);
         
-        std::unique_ptr<Window> window;
+        Scope<Window> window;
         ImGuiLayer* imGuiLayer;
         bool bRunning = true;
 

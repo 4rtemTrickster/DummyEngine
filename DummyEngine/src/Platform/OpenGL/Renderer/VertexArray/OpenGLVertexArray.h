@@ -12,15 +12,15 @@ namespace Dummy
         void Bind() const override;
         void Unbind() const override;
         
-        void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
-        void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
+        void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+        void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
         
-        const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const override { return VertexBuffers; }
-        const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return IndexBuffer_; }
+        const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override { return VertexBuffers; }
+        const Ref<IndexBuffer>& GetIndexBuffer() const override { return IndexBuffer_; }
 
     protected:
-        std::vector<std::shared_ptr<VertexBuffer>> VertexBuffers;
-        std::shared_ptr<IndexBuffer> IndexBuffer_;
+        std::vector<Ref<VertexBuffer>> VertexBuffers;
+        Ref<IndexBuffer> IndexBuffer_;
 
         uint32_t RendererID;
     };

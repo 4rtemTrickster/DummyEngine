@@ -15,7 +15,7 @@ namespace Dummy
         DE_CORE_ASSERT(!Instance, "Application already exists!");
         Instance = this;
         
-        window = std::unique_ptr<Window>(Window::Create());
+        window = Scope<Window>(Window::Create());
         window->SetEventCallBack(DE_BIND_EVENT_FN(Application::OnEvent));
 
         imGuiLayer = new ImGuiLayer();

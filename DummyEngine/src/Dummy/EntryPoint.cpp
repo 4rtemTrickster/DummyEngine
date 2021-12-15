@@ -1,7 +1,7 @@
 ﻿#include "DEpch.h"
 #include "EntryPoint.h"
 
-inline int main(int argc, char** argv)
+int main(int argc, char** argv)
 {
     Dummy::Log::Init();
     
