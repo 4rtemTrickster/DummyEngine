@@ -9,6 +9,7 @@
 namespace Dummy
 {
     OpenGLShader::OpenGLShader(const std::string& name)
+        :   Name(name)
     {
         static const std::filesystem::path ShadersFolder("res\\Shaders");
         std::vector<std::pair<GLuint, std::string>> Shaders;

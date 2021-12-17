@@ -17,6 +17,8 @@ namespace Dummy
         void Bind() const override;
         void Unbind() const override;
 
+        const std::string& GetName() const override { return Name; }
+
         void UploadUniformInt(const std::string& name, const int value);
 
         void UploadUniformFloat4(const std::string& name, const glm::vec4& value);
@@ -27,6 +29,7 @@ namespace Dummy
 
     protected:
         uint32_t RendererID;
+        std::string Name;
         
         // Caching for uniforms
         std::unordered_map <std::string, unsigned int> UniformLocationCache;
@@ -36,6 +39,5 @@ namespace Dummy
         unsigned int GetUniformLocation(const std::string& name);
         
         static std::string ParseShader(const std::filesystem::path& path);
-
     };
 }

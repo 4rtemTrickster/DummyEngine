@@ -90,14 +90,14 @@ TestGameLayer::TestGameLayer()
 
     VertexArray_->SetIndexBuffer(IB);
 
-    shader_.reset(Dummy::Shader::Create("Cube"));
+    SHLib.Add(Dummy::Shader::Create("Cube"));
     
     std::filesystem::path texturePath("res/Textures/test.png");
     
     texture = Dummy::Texture2D::Create(texturePath);
 
-    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->Bind();
-    std::dynamic_pointer_cast<Dummy::OpenGLShader>(shader_)->UploadUniformInt("u_Texture", 0);
+    std::dynamic_pointer_cast<Dummy::OpenGLShader>(SHLib.Get("Cube"))->Bind();
+    std::dynamic_pointer_cast<Dummy::OpenGLShader>(SHLib.Get("Cube"))->UploadUniformInt("u_Texture", 0);
 }
 
 void TestGameLayer::OnUpdate(Dummy::Timestep ts)
@@ -121,7 +121,7 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
     Dummy::Renderer::BeginScene(Camera_);
 
     texture->Bind();
-    Dummy::Renderer::Submit(shader_, VertexArray_);
+    Dummy::Renderer::Submit(SHLib.Get("Cube"), VertexArray_);
 
     Dummy::Renderer::EndScene();
 }

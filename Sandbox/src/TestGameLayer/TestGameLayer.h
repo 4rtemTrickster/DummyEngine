@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <Dummy.h>
 
+#include "Dummy/Renderer/ShaderLibrary/ShaderLibrary.h"
+
 class TestGameLayer : public Dummy::Layer
 {
 public:
@@ -17,8 +19,10 @@ public:
     bool OnKeyPressedEvent(Dummy::KeyPressedEvent& event);
 
 protected:
+    Dummy::ShaderLibrary SHLib;
+    
     Dummy::Ref<Dummy::VertexArray> VertexArray_;
-    Dummy::Ref<Dummy::Shader> shader_;
+    //Dummy::Ref<Dummy::Shader> shader_;
     Dummy::Ref<Dummy::Texture2D> texture;
 
     Dummy::Camera Camera_;
