@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "imgui.h"
 #include "Dummy/Input/Input.h"
+#include "Dummy/Renderer/Renderer.h"
 #include "GLFW/glfw3.h"
 
 
@@ -17,6 +18,8 @@ namespace Dummy
         
         window = Scope<Window>(Window::Create());
         window->SetEventCallBack(DE_BIND_EVENT_FN(Application::OnEvent));
+
+        Renderer::Init();
 
         imGuiLayer = new ImGuiLayer();
         PushOverlay(imGuiLayer);

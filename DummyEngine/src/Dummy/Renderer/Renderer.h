@@ -8,6 +8,8 @@ namespace Dummy
     class Renderer
     {
     public:
+        static void Init();
+        
         static void BeginScene(Camera& camera); //TODO: Scene params
         static void EndScene();
 
