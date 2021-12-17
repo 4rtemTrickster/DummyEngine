@@ -3,7 +3,6 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.inl>
 
-#include "imgui/imgui.h"
 #include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 
 TestGameLayer::TestGameLayer()
@@ -59,8 +58,6 @@ TestGameLayer::TestGameLayer()
             {Dummy::ShaderDataType::FLOAT2, "a_TexCoord"}
         });
 
-    //{Dummy::ShaderDataType::FLOAT4, "a_Color"}
-
     VertexArray_->AddVertexBuffer(VB);
 
 
@@ -90,11 +87,9 @@ TestGameLayer::TestGameLayer()
 
     VertexArray_->SetIndexBuffer(IB);
 
-    SHLib.Add(Dummy::Shader::Create("Cube"));
+    SHLib.Load("Cube");
     
-    std::filesystem::path texturePath("res/Textures/test.png");
-    
-    texture = Dummy::Texture2D::Create(texturePath);
+    texture = Dummy::Texture2D::Create("res/Textures/test.png");
 
     std::dynamic_pointer_cast<Dummy::OpenGLShader>(SHLib.Get("Cube"))->Bind();
     std::dynamic_pointer_cast<Dummy::OpenGLShader>(SHLib.Get("Cube"))->UploadUniformInt("u_Texture", 0);
