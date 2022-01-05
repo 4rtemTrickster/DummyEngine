@@ -6,7 +6,13 @@ namespace Dummy
 {
     class DUMMY_API Input
     {
+    protected:
+        Input() = default;
     public:
+
+        Input(const Input&) = delete;
+        Input& operator=(const Input&) = delete;
+        
         inline static bool IsKeyPressed(int keycode) { return Instance->IsKeyPressedImpl(keycode); }
 
         inline static bool IsMouseMoved() { return Instance->IsMouseMovedImpl(); }
