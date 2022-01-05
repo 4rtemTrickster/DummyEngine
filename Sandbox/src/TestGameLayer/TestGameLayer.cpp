@@ -6,12 +6,12 @@
 #include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 
 TestGameLayer::TestGameLayer()
-    :   Layer("TestGameLayer"), Camera_(CameraPosition)
+    :   Layer("TestGameLayer")
 {
-    CameraPitch = Camera_.GetRotationPitch();
-    CameraYaw = Camera_.GetRotationYaw();
 
-    VertexArray_.reset(Dummy::VertexArray::Create());
+    CamCont.GetCamera().SetPosition({0.0f, 0.0f, 3.0f});
+    
+    VertexArray_ = Dummy::VertexArray::Create();
 
     std::vector<float> vertices = {
              0.5f, -0.5f, -0.5f,    0.0f, 0.0f,     // 0
@@ -97,23 +97,12 @@ TestGameLayer::TestGameLayer()
 
 void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 {
-    if (Dummy::Input::IsKeyPressed(DE_KEY_W)) CameraPosition += (CameraSpeed * ts) * Camera_.GetForwardVector();
-    else if (Dummy::Input::IsKeyPressed(DE_KEY_S)) CameraPosition -= (CameraSpeed * ts) * Camera_.GetForwardVector();
-
-    if (Dummy::Input::IsKeyPressed(DE_KEY_D)) CameraPosition +=
-        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * (CameraSpeed * ts);
-    else if (Dummy::Input::IsKeyPressed(DE_KEY_A)) CameraPosition -=
-        glm::normalize(glm::cross(Camera_.GetForwardVector(), Camera_.GetUpVector())) * (CameraSpeed * ts);
-
-    if(Dummy::Input::IsMouseMoved()) MoveCamera(ts);
-
+    CamCont.OnUpdate(ts);
+    
     Dummy::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.0f});
     Dummy::RenderCommand::Clear();
-
-    Camera_.SetPosition(CameraPosition);
-    Camera_.SetRotation(CameraPitch, CameraYaw);
-
-    Dummy::Renderer::BeginScene(Camera_);
+    
+    Dummy::Renderer::BeginScene(CamCont.GetCamera());
 
     texture->Bind();
     Dummy::Renderer::Submit(SHLib.Get("Cube"), VertexArray_);
@@ -123,6 +112,9 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 
 void TestGameLayer::OnEvent(Dummy::Event& event)
 {
+
+    CamCont.OnEvent(event);
+    
     Dummy::EventDispatcher dispatcher(event);
 
     dispatcher.Dispatch<Dummy::KeyPressedEvent>(DE_BIND_EVENT_FN(TestGameLayer::OnKeyPressedEvent));
@@ -136,33 +128,4 @@ bool TestGameLayer::OnKeyPressedEvent(Dummy::KeyPressedEvent& event)
         return false;
     }
     return true;
-}
-
-void TestGameLayer::MoveCamera(Dummy::Timestep ts)
-{
-    static std::pair<float, float> LastPos;
-    std::pair<float, float> CurrentPos = Dummy::Input::GetMousePos();
-
-    if (static bool first = true)
-    {
-        LastPos = Dummy::Input::GetMousePos();
-        first = false;
-    }
-        
-    // Offset * sensitivity
-    CameraYaw   += (CurrentPos.first - LastPos.first)   * CameraSensitivity * ts; 
-    CameraPitch += (LastPos.second - CurrentPos.second) * CameraSensitivity * ts;
-
-    LastPos.first = CurrentPos.first;
-    LastPos.second = CurrentPos.second;
-
-    if (CameraPitch > 89.0f)
-        CameraPitch = 89.0f;
-    if (CameraPitch < -89.0f)
-        CameraPitch = -89.0f;
-
-    Camera_.SetPosition(CameraPosition);
-    Camera_.SetRotation(CameraPitch, CameraYaw);
-
-    Camera_.UpdateCameraVectors();
 }

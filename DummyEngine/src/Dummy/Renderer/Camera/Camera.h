@@ -19,6 +19,11 @@ namespace Dummy
         float GetRotationPitch() const { return Pitch; }
         float GetRotationYaw() const { return Yaw; }
         
+        /**
+         * \return Pair of camera rotation (Pitch, Yaw)
+         */
+        std::pair<float, float> GetRotation() const { return std::make_pair(Pitch, Yaw); }
+        
         const glm::vec3& GetForwardVector() const { return Front; }
         const glm::vec3& GetUpVector() const { return Up; }
         
@@ -26,7 +31,7 @@ namespace Dummy
         const glm::mat4& GetViewMatrix() const { return ViewMatrix; }
         const glm::mat4& GetViewProjectionMatrix() const { return ViewProjectionMatrix; }
 
-        void UpdateCameraVectors();
+        void UpdateCameraVectors(float FOV = 60.0f, float aspectRatio = 1920.0f/1080.0f);
 
     protected:
 

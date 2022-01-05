@@ -12,7 +12,7 @@ namespace Dummy
         UpdateCameraVectors();
     }
 
-    void Camera::UpdateCameraVectors()
+    void Camera::UpdateCameraVectors(float FOV, float aspectRatio)
     {
         glm::vec3 front;
         front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
@@ -25,7 +25,7 @@ namespace Dummy
         this->Up    = glm::normalize(glm::cross(Right, Front));
 
         ViewMatrix = glm::lookAt(this->Position, this->Position + this->Front, this->Up);
-        ProjectionMatrix = glm::perspective(glm::radians(60.0f), 1920.f/1080.f, 0.1f, 1000.0f);
+        ProjectionMatrix = glm::perspective(glm::radians(FOV), aspectRatio, 0.1f, 1000.0f);
 
         ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
     }
