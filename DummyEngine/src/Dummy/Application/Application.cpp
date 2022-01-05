@@ -25,10 +25,6 @@ namespace Dummy
         PushOverlay(imGuiLayer);
     }
 
-    Application::~Application()
-    {
-    }
-
     void Application::Run()
     {
         while(bRunning)

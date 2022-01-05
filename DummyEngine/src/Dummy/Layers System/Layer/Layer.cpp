@@ -6,6 +6,4 @@ namespace Dummy
 {
     Layer::Layer(const std::string& name)
         : DebugName(name) {}
-    
-    Layer::~Layer() {}
 }
