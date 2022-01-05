@@ -10,7 +10,10 @@ namespace Dummy
     LayerStack::~LayerStack()
     {
         for(Layer* layer : Layers)
+        {
+            layer->OnDetach();
             delete layer;
+        }
     }
 
     void LayerStack::PushLayer(Layer* layer)
@@ -29,6 +32,7 @@ namespace Dummy
 
         if(it != Layers.end())
         {
+            layer->OnDetach();
             Layers.erase(it);
             --LayersInsertIndex;
         }
@@ -38,6 +42,10 @@ namespace Dummy
     {
         auto it = std::find(Layers.begin(), Layers.end(), overlay);
 
-        if(it != Layers.end()) Layers.erase(it);
+        if(it != Layers.end())
+        {
+            overlay->OnDetach();
+            Layers.erase(it);
+        }
     }
 }
