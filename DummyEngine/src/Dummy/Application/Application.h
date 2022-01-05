@@ -32,10 +32,13 @@ namespace Dummy
     protected:
 
         bool OnWindowClose(WindowCloseEvent& e);
+        bool OnWindowResize(WindowResizeEvent& e);
         
         Scope<Window> window;
         ImGuiLayer* imGuiLayer;
+        
         bool bRunning = true;
+        bool bMinimized = false;
 
         LayerStack Layer_Stack;
         float LastFrameTime = 0.0f;

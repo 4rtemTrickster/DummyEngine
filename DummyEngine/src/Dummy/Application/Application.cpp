@@ -36,9 +36,10 @@ namespace Dummy
             float time = static_cast<float>(glfwGetTime()); //TODO: Platform::GetTime();
             Timestep timestep = time - LastFrameTime;
             LastFrameTime = time;
-            
-            for(Layer* layer : Layer_Stack)
-                layer->OnUpdate(timestep);
+
+            if (!bMinimized)
+                for(Layer* layer : Layer_Stack)
+                    layer->OnUpdate(timestep);
 
             imGuiLayer->Begin();
             for(Layer* layer : Layer_Stack)
@@ -54,6 +55,7 @@ namespace Dummy
         EventDispatcher dispatcher(e);
 
         dispatcher.Dispatch<WindowCloseEvent>(DE_BIND_EVENT_FN(Application::OnWindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(DE_BIND_EVENT_FN(Application::OnWindowResize));
         
         for(auto it = Layer_Stack.end(); it != Layer_Stack.begin(); )
         {
@@ -79,5 +81,20 @@ namespace Dummy
     {
         bRunning = false;
         return true;
+    }
+
+    bool Application::OnWindowResize(WindowResizeEvent& e)
+    {
+        if(e.GetWidth() == 0 || e.GetHeight() == 0)
+        {
+            bMinimized = true;
+            return false;
+        }
+
+        bMinimized = false;
+
+        Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+        
+        return false;
     }
 } 

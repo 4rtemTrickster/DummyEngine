@@ -92,7 +92,7 @@ namespace Dummy
 
     bool CameraController::OnWindowResizeEvent(WindowResizeEvent& e)
     {
-            Camera_.UpdateCameraVectors(60.0f, static_cast<float>(e.GetWidth())/static_cast<float>(e.GetHeight()));
+        Camera_.UpdateCameraVectors(60.0f, static_cast<float>(e.GetWidth())/static_cast<float>(e.GetHeight()));
         return false;
     }
 }
