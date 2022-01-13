@@ -62,7 +62,7 @@ namespace Dummy
 
     void BufferLayout::CalculateOffsetsAndStride()
     {
-        uint32_t offset = 0;
+        size_t offset = 0;
         Stride = 0;
 
         for(auto& element : BufferElements)
