@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Dummy/Renderer/GraphicsContext/GraphicsContext.h"
-#include "GLFW/glfw3.h"
+
+#include <GLFW/glfw3.h>
 
 namespace Dummy
 {

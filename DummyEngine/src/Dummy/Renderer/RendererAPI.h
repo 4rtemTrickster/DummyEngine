@@ -25,6 +25,8 @@ namespace Dummy
 
         static inline API GetCurrentAPI() { return CurrentAPI; }
 
+        static Scope<RendererAPI> Create();
+
     protected:
         static API CurrentAPI;
     };

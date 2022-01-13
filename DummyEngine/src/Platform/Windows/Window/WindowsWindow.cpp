@@ -6,7 +6,6 @@
 #include "Dummy/Event/Events/ApplicationEvent.h"
 #include "Dummy/Event/Events/KeyEvent.h"
 #include "Dummy/Event/Events/MouseEvent.h"
-#include "Dummy/Log/Log.h"
 #include "Platform/OpenGL/Renderer/GraphicsContext/OpenGLContext.h"
 
 namespace Dummy
@@ -18,9 +17,9 @@ namespace Dummy
         DE_CORE_ERROR("[GLFW ERROR]: ({0}): {1}", error, description);
     }
 
-    Window* Window::Create(const WindowProps& props)
+    Scope<Window> Window::Create(const WindowProps& props)
     {
-        return new WindowsWindow(props);
+        return CreateScope<WindowsWindow>(props);
     }
 
     WindowsWindow::WindowsWindow(const WindowProps& props)

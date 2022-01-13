@@ -1,10 +1,9 @@
 #include "DEpch.h"
 
 #include "Application.h"
-#include "imgui.h"
-#include "Dummy/Input/Input.h"
 #include "Dummy/Renderer/Renderer.h"
-#include "GLFW/glfw3.h"
+
+#include <GLFW/glfw3.h>
 
 
 namespace Dummy
@@ -23,6 +22,11 @@ namespace Dummy
 
         imGuiLayer = new ImGuiLayer();
         PushOverlay(imGuiLayer);
+    }
+
+    Application::~Application()
+    {
+        //TODO: Renderer::Shutdown();
     }
 
     void Application::Run()

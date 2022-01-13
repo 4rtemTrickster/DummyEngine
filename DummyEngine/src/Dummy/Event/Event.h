@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "DEpch.h"
-#include "../Core.h"
+#include "Dummy/Core.h"
 
 
 namespace Dummy

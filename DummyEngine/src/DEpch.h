@@ -16,6 +16,8 @@
 #include <unordered_map>
 #include <array>
 
+#include "Dummy/Log/Log.h"
+
 #ifdef DE_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

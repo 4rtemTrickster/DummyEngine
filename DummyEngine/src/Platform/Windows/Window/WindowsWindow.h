@@ -2,9 +2,9 @@
 
 #include "Dummy/Window/Window.h"
 
-#include <GLFW/glfw3.h>
-
 #include "Dummy/Renderer/GraphicsContext/GraphicsContext.h"
+
+#include <GLFW/glfw3.h>
 
 namespace Dummy
 {

@@ -1,10 +1,8 @@
 ﻿#include "DEpch.h"
 #include "OpenGLTexture2D.h"
 
-#include "stb_image.h"
-
-#include "Dummy/Log/Log.h"
-#include "glad/glad.h"
+#include <stb_image.h>
+#include <glad/glad.h>
 
 namespace Dummy
 {

@@ -2,8 +2,7 @@
 #include "OpenGLContext.h"
 
 #include "Dummy/Core.h"
-#include "Dummy/Log/Log.h"
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace Dummy
 {

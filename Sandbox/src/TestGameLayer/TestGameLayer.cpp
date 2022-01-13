@@ -1,9 +1,9 @@
 ﻿#include "TestGameLayer.h"
 
+#include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
+
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.inl>
-
-#include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 
 TestGameLayer::TestGameLayer()
     :   Layer("TestGameLayer")
@@ -50,7 +50,7 @@ TestGameLayer::TestGameLayer()
     };
 
     Dummy::Ref<Dummy::VertexBuffer> VB;
-    VB.reset(Dummy::VertexBuffer::Create(vertices.data(), sizeof(float) * vertices.size()));
+    VB = Dummy::VertexBuffer::Create(vertices.data(), sizeof(float) * vertices.size());
 
     VB->SetLayout(
         {
@@ -83,7 +83,7 @@ TestGameLayer::TestGameLayer()
     };
 
     Dummy::Ref<Dummy::IndexBuffer> IB;
-    IB.reset(Dummy::IndexBuffer::Create(indices.data(), indices.size()));
+    IB = Dummy::IndexBuffer::Create(indices.data(), indices.size());
 
     VertexArray_->SetIndexBuffer(IB);
 

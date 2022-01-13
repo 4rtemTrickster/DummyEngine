@@ -1,9 +1,8 @@
 ﻿#include "DEpch.h"
 #include "OpenGLShader.h"
 
-#include "Dummy/Log/Log.h"
-#include "glad/glad.h"
-#include "glm/gtc/type_ptr.hpp"
+#include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 
 namespace Dummy

@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "glm/glm.hpp"
-
 #include "Dummy/Renderer/Shader/Shader.h"
+
+#include <glm/glm.hpp>
 
 namespace Dummy
 {

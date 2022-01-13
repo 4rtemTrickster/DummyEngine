@@ -1,10 +1,9 @@
 ﻿#include "DEpch.h"
 #include "WindowsInput.h"
 
-#include <GLFW/glfw3.h>
-
 #include "Dummy/Application/Application.h"
 
+#include <GLFW/glfw3.h>
 
 namespace Dummy
 {

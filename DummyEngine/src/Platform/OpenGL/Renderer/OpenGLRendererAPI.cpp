@@ -1,7 +1,7 @@
 ﻿#include "DEpch.h"
 #include "OpenGLRendererAPI.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace Dummy
 {

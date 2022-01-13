@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include "Dummy/Core.h"
-#include "Dummy/Log/Log.h"
 
 namespace Dummy
 {

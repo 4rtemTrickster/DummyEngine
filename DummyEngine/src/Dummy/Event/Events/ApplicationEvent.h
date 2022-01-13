@@ -2,7 +2,7 @@
 
 #include "DEpch.h"
 
-#include "../Event.h"
+#include "Dummy/Event/Event.h"
 
 
 namespace Dummy
@@ -34,7 +34,7 @@ namespace Dummy
     class DUMMY_API WindowCloseEvent : public Event
     {
     public:
-        WindowCloseEvent() {}
+        WindowCloseEvent() = default;
 
         std::string ToString() const override
         {
@@ -50,7 +50,7 @@ namespace Dummy
     class DUMMY_API AppTickEvent : public Event
     {
     public:
-        AppTickEvent() {}
+        AppTickEvent() = default;
 
         EVENT_CLASS_TYPE(ET_AppTick)
         EVENT_CLASS_CATEGORY(EC_Application)
@@ -59,7 +59,7 @@ namespace Dummy
     class DUMMY_API AppUpdateEvent : public Event
     {
     public:
-        AppUpdateEvent() {}
+        AppUpdateEvent() = default;
 
         EVENT_CLASS_TYPE(ET_AppUpdate)
         EVENT_CLASS_CATEGORY(EC_Application)
@@ -68,7 +68,7 @@ namespace Dummy
     class DUMMY_API AppRenderEvent : public Event
     {
     public:
-        AppRenderEvent() {}
+        AppRenderEvent() = default;
 
         EVENT_CLASS_TYPE(ET_AppRender)
         EVENT_CLASS_CATEGORY(EC_Application)

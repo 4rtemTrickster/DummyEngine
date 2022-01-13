@@ -12,6 +12,6 @@ namespace Dummy
 
         virtual size_t GetCount() const  = 0;
 
-        static IndexBuffer* Create(uint32_t* indices, size_t count);
+        static Ref<IndexBuffer> Create(uint32_t* indices, size_t count);
     };
 }

@@ -20,7 +20,7 @@ namespace Dummy
                 ((CameraSpeed * ts) * Camera_.GetForwardVector()));
         }
 
-        if (Dummy::Input::IsKeyPressed(DE_KEY_D))
+        if (Input::IsKeyPressed(DE_KEY_D))
         {
             Camera_.SetPosition(Camera_.GetPosition() +
                     glm::normalize
@@ -35,7 +35,7 @@ namespace Dummy
                     (CameraSpeed * ts)
                 );
         }
-        else if (Dummy::Input::IsKeyPressed(DE_KEY_A))
+        else if (Input::IsKeyPressed(DE_KEY_A))
         {
             Camera_.SetPosition(Camera_.GetPosition() -
                     glm::normalize
