@@ -77,7 +77,6 @@ project "DummyEngine"
 
         defines
         {
-            "DE_PLATFORM_WINDOWS",
             "DE_BUILD_DLL",
             "GLFW_INCLUDE_NONE"
         }
@@ -133,10 +132,6 @@ project "Sandbox"
     filter "system:windows"
         systemversion "latest"
 
-        defines
-        {
-            "DE_PLATFORM_WINDOWS"
-        }
 
     filter "configurations:Debug"
         defines "DE_DEBUG"
