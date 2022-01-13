@@ -31,7 +31,7 @@ namespace Dummy
         virtual void Shutdown();
 
         GLFWwindow* Window;
-        GraphicsContext* Context;
+        Scope<GraphicsContext> Context;
 
         struct WindowData
         {

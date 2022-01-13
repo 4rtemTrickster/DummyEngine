@@ -32,6 +32,6 @@ namespace Dummy
         virtual float GetMouseYImpl() = 0;
         
         
-        static Input* Instance;
+        static Scope<Input> Instance;
     };
 }

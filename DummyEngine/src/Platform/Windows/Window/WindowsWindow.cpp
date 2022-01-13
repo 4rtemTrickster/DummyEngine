@@ -54,7 +54,7 @@ namespace Dummy
         Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), Data.Title.c_str(),
                                   nullptr, nullptr);
 
-        Context = new OpenGLContext(Window);
+        Context = CreateScope<OpenGLContext>(Window);
         Context->Init();
         
         glfwSetWindowUserPointer(Window, &Data);
