@@ -94,8 +94,11 @@ namespace Dummy
             return;
         }
 
-        glDetachShader(RendererID, Shaders[0].first);
-        glDetachShader(RendererID, Shaders[1].first);
+        for(auto& shader : Shaders)
+        {
+            glDetachShader(RendererID, shader.first);
+            glDeleteShader(shader.first);
+        }
     }
 
     OpenGLShader::~OpenGLShader()
