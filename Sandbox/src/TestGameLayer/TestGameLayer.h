@@ -10,7 +10,7 @@ class TestGameLayer : public Dummy::Layer
 public:
     TestGameLayer();
 
-    void MoveCamera(Dummy::Timestep ts);
+    //void MoveCamera(Dummy::Timestep ts);
 
     void OnUpdate(Dummy::Timestep ts) override;
 

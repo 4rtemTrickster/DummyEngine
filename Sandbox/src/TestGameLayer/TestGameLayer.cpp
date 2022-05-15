@@ -2,13 +2,10 @@
 
 #include "Platform/OpenGL/Renderer/Shader/OpenGLShader.h"
 
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.inl>
 
 TestGameLayer::TestGameLayer()
     :   Layer("TestGameLayer")
 {
-
     CamCont.GetCamera().SetPosition({0.0f, 0.0f, 3.0f});
     
     VertexArray_ = Dummy::VertexArray::Create();
@@ -112,7 +109,6 @@ void TestGameLayer::OnUpdate(Dummy::Timestep ts)
 
 void TestGameLayer::OnEvent(Dummy::Event& event)
 {
-
     CamCont.OnEvent(event);
     
     Dummy::EventDispatcher dispatcher(event);
