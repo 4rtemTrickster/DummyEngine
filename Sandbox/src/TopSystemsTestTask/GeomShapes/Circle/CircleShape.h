@@ -6,6 +6,7 @@ class CircleShape : public IShape
 public:
     CircleShape();
     ~CircleShape() override {}
+    
     Dummy::Ref<Dummy::VertexArray> GetVertexArray() override { return VertexArray; }
 
 protected:

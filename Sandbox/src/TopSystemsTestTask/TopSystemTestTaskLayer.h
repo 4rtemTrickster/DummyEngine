@@ -12,7 +12,7 @@ class TopSystemTestTaskLayer : public Dummy::Layer
 public:
     
     TopSystemTestTaskLayer();
-    ~TopSystemTestTaskLayer() override;
+    ~TopSystemTestTaskLayer() override {}
     
     void OnUpdate(Dummy::Timestep ts) override;
     void OnEvent(Dummy::Event& event) override;

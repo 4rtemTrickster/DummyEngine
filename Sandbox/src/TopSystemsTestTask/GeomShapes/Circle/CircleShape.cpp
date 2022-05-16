@@ -1,7 +1,8 @@
 ﻿#include "CircleShape.h"
 
-#include "glm/ext/scalar_constants.hpp"
 #include <future>
+
+#include "glm/ext/scalar_constants.hpp"
 
 CircleShape::CircleShape()
 {
@@ -9,15 +10,17 @@ CircleShape::CircleShape()
 
     std::vector<float> vertices;
 
-    vertices.push_back(0.0f);
-    vertices.push_back(0.0f);
-    vertices.push_back(-3.0f);
+    // Circle center
+    vertices.push_back(0.0f);   // X
+    vertices.push_back(0.0f);   // Y
+    vertices.push_back(-3.0f);  // Z
 
+    // Coordinates of the bases of triangles
     for (size_t i = 0; i < SegmentsCount; ++i)
     {
-        vertices.push_back(Radius * cos(i * 2.0f * glm::pi<float>() / SegmentsCount));
-        vertices.push_back(Radius * sin(i * 2.0f * glm::pi<float>() / SegmentsCount));
-        vertices.push_back(-3.0f);
+        vertices.push_back(Radius * cos(i * 2.0f * glm::pi<float>() / SegmentsCount)); // X
+        vertices.push_back(Radius * sin(i * 2.0f * glm::pi<float>() / SegmentsCount)); // Y
+        vertices.push_back(-3.0f);  // Z
     }
 
     std::vector<uint32_t> indices;
