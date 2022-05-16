@@ -33,11 +33,13 @@ void TopSystemTestTaskLayer::OnImGuiRender()
 
     if(ImGui::Button("Random"))
     {
+        DE_TRACE("Generating a random set of shapes");
         ShapesFactory = Dummy::CreateRef<RandomShapeFactory>();
         ShapesFactory->CreateShapes(ShapesToDraw);
     }
     if(ImGui::Button("Standrat"))
     {
+        DE_TRACE("Generating a standard set of shapes");
         ShapesFactory = Dummy::CreateRef<StandardShapeFactory>();
         ShapesFactory->CreateShapes(ShapesToDraw);
     }
